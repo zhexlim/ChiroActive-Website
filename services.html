@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services — ChiroActive</title>
+  <meta name="description" content="Chiropractic services in Adelaide including spinal adjustments, flexion distraction, K-Laser therapy, and after-hours care." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy:#1B3A70;--navy-dark:#122856;--navy-light:#2A4D8A;--navy-faint:#EEF2FA;
+      --green:#6EB534;--green-dark:#4F8A20;--green-faint:#EDF7E3;
+      --bg:#F8F7F2;--text:#191D2C;--muted:#5B6278;--quiet:#8B94A8;
+      --border:#E2DDD3;--border-soft:#EDE9E1;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Outfit',system-ui,sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;}
+    a{text-decoration:none;color:inherit;}
+    .f-display{font-family:'Fraunces',Georgia,serif;}
+    .container{max-width:1160px;margin:0 auto;padding:0 32px;}
+    /* Nav */
+    #site-nav{position:sticky;top:0;z-index:300;background:rgba(255,255,255,0.97);backdrop-filter:blur(14px);border-bottom:1px solid var(--border-soft);box-shadow:0 1px 16px rgba(27,58,112,0.06);}
+    .nav-inner{max-width:1160px;margin:0 auto;padding:0 32px;height:70px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
+    .nav-logo img{height:44px;width:auto;}
+    .nav-links{display:flex;align-items:center;gap:4px;flex:1;justify-content:center;}
+    .nav-link{font-size:14px;font-weight:500;color:var(--muted);padding:6px 12px;border-radius:6px;transition:color 0.18s,background 0.18s;}
+    .nav-link:hover{color:var(--navy);background:var(--navy-faint);}
+    .nav-link.active{color:var(--navy);font-weight:600;}
+    .nav-actions{display:flex;align-items:center;gap:12px;margin-left:auto;}
+    .btn{display:inline-flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif;font-weight:600;font-size:15px;border-radius:7px;padding:13px 26px;cursor:pointer;border:2px solid transparent;text-decoration:none;transition:background .18s,color .18s,transform .15s,box-shadow .18s;}
+    .btn-primary{background:var(--navy);color:white;box-shadow:0 4px 16px rgba(27,58,112,0.22);}
+    .btn-primary:hover{background:var(--navy-dark);transform:translateY(-2px);}
+    .hamburger{display:none;align-items:center;justify-content:center;width:40px;height:40px;border:1.5px solid var(--border);border-radius:8px;background:transparent;color:var(--navy);cursor:pointer;}
+    /* Mobile nav */
+    .mobile-backdrop{position:fixed;inset:0;background:rgba(18,28,56,0.48);z-index:400;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s;}
+    .mobile-backdrop.open{opacity:1;visibility:visible;}
+    .mobile-menu{position:fixed;top:0;right:0;width:min(320px,90vw);height:100%;background:white;z-index:500;transform:translateX(100%);transition:transform .32s cubic-bezier(0.22,1,0.36,1);box-shadow:-8px 0 48px rgba(18,28,56,0.14);display:flex;flex-direction:column;}
+    .mobile-menu.open{transform:translateX(0);}
+    .mobile-menu-top{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;border-bottom:1px solid var(--border-soft);}
+    .mobile-menu-top img{height:36px;}
+    .mobile-close{width:36px;height:36px;border:1.5px solid var(--border);border-radius:7px;background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+    .mobile-nav-body{padding:16px 16px 24px;flex:1;display:flex;flex-direction:column;}
+    .mobile-nav-link{display:block;padding:12px 14px;font-size:15px;font-weight:500;color:var(--text);border-radius:8px;transition:background .15s;}
+    .mobile-nav-link:hover,.mobile-nav-link.active{background:var(--bg);}
+    .mobile-nav-details summary{list-style:none;display:flex;align-items:center;justify-content:space-between;padding:12px 14px;font-size:15px;font-weight:500;color:var(--text);border-radius:8px;cursor:pointer;}
+    .mobile-nav-details summary::-webkit-details-marker{display:none;}
+    .mobile-nav-details[open] summary .chevron{transform:rotate(180deg);}
+    .mobile-nav-details .chevron{transition:transform .2s;}
+    .mobile-nav-sub{padding:4px 6px 8px 22px;}
+    .mobile-nav-sub a{display:block;padding:9px 12px;font-size:14px;color:var(--muted);border-radius:7px;}
+    .mobile-nav-footer{margin-top:auto;padding:20px 16px 0;border-top:1px solid var(--border-soft);}
+    .mobile-contact-line{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--muted);padding:6px 0;}
+    .mobile-contact-line a{color:var(--navy);font-weight:500;}
+    /* Page */
+    .page-hero{background:var(--navy-dark);padding:72px 32px;color:white;}
+    .page-hero-label{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(110,181,52,.85);margin-bottom:14px;}
+    .page-hero h1{font-family:'Fraunces',serif;font-size:clamp(28px,3.5vw,48px);font-weight:600;letter-spacing:-.025em;line-height:1.15;max-width:680px;}
+    .page-hero p{font-size:17px;color:rgba(255,255,255,.65);line-height:1.72;max-width:520px;margin-top:16px;}
+    /* Services grid */
+    .services-section{padding:88px 32px;}
+    .service-card{background:white;border:1px solid var(--border);border-radius:12px;padding:36px 36px 40px;margin-bottom:24px;box-shadow:0 2px 10px rgba(27,58,112,0.05);}
+    .service-card:last-child{margin-bottom:0;}
+    .service-badge{display:inline-flex;align-items:center;gap:6px;background:var(--green-faint);color:var(--green-dark);border:1px solid rgba(110,181,52,.25);padding:4px 12px;border-radius:100px;font-size:12px;font-weight:600;letter-spacing:.02em;margin-bottom:20px;}
+    .service-card h2{font-family:'Fraunces',serif;font-size:clamp(22px,2.4vw,30px);font-weight:600;letter-spacing:-.02em;color:var(--text);margin-bottom:14px;}
+    .service-card p{font-size:16px;color:var(--muted);line-height:1.72;max-width:680px;}
+    /* CTA */
+    .service-card-link{display:block;text-decoration:none;color:inherit;transition:transform 0.2s cubic-bezier(0.22,1,0.36,1),box-shadow 0.2s;}
+    .service-card-link:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(27,58,112,0.1);}
+    .service-card-inner{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;}
+    .service-card-inner > div{flex:1;}
+    .service-card-cta{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;color:var(--navy);white-space:nowrap;flex-shrink:0;transition:gap 0.2s;}
+    .service-card-link:hover .service-card-cta{gap:10px;}
+    .services-cta{background:white;border:1px solid var(--border);border-radius:12px;padding:48px 40px;text-align:center;margin-top:48px;box-shadow:0 2px 10px rgba(27,58,112,0.05);}
+    .services-cta h3{font-family:'Fraunces',serif;font-size:clamp(22px,2.4vw,32px);font-weight:600;letter-spacing:-.02em;color:var(--text);margin-bottom:12px;}
+    .services-cta p{font-size:16px;color:var(--muted);margin-bottom:28px;}
+    /* Footer */
+        footer{background:#0C1D3E;color:white;}
+    .footer-top{max-width:1160px;margin:0 auto;padding:56px 32px 48px;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;}
+    .footer-brand img{height:38px;width:auto;margin-bottom:16px;}
+    .footer-brand p{font-size:14px;color:rgba(255,255,255,0.45);line-height:1.65;margin-bottom:20px;}
+    .footer-contact-item{display:flex;align-items:center;gap:8px;font-size:14px;color:rgba(255,255,255,0.55);margin-bottom:8px;}
+    .footer-contact-item a{color:rgba(255,255,255,0.7);transition:color 0.2s;}
+    .footer-contact-item a:hover{color:white;}
+    .footer-col h4{font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:16px;}
+    .footer-col a{display:block;font-size:14px;color:rgba(255,255,255,0.55);padding:4px 0;transition:color 0.18s;}
+    .footer-col a:hover{color:rgba(255,255,255,0.9);}
+    .footer-bottom{border-top:1px solid rgba(255,255,255,0.07);padding:20px 32px;max-width:1160px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+    .footer-bottom p{font-size:13px;color:rgba(255,255,255,0.28);}
+    @media(max-width:1060px){.footer-top{grid-template-columns:1fr 1fr;}}
+    @media(max-width:640px){footer .footer-top{padding:40px 20px 36px;grid-template-columns:1fr;gap:32px;}footer .footer-bottom{padding:18px 20px;flex-direction:column;text-align:center;}}
+    .nav-dropdown-wrap{position:relative;}
+    .nav-dropdown-trigger{display:flex;align-items:center;gap:4px;cursor:pointer;user-select:none;background:none;}
+    .nav-dropdown-trigger svg{transition:transform .2s ease;}
+    .nav-dropdown-wrap:hover .nav-dropdown-trigger svg,.nav-dropdown-wrap:focus-within .nav-dropdown-trigger svg{transform:rotate(180deg);}
+    .nav-dropdown{position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%) translateY(-4px);background:white;border:1px solid var(--border);border-radius:10px;box-shadow:0 8px 28px rgba(27,58,112,0.1),0 2px 8px rgba(0,0,0,0.06);min-width:220px;padding:6px;opacity:0;visibility:hidden;transition:opacity .16s ease,visibility .16s ease,transform .16s ease;}
+    .nav-dropdown-wrap:hover .nav-dropdown,.nav-dropdown-wrap:focus-within .nav-dropdown{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0);}
+    .nav-dropdown a{display:block;padding:9px 14px;font-size:14px;font-weight:500;color:var(--muted);border-radius:7px;transition:background .15s,color .15s;}
+    .nav-dropdown a:hover{background:var(--navy-faint);color:var(--navy);}
+    @media(max-width:900px){.nav-links{display:none;}
+      .nav-logo { display: none; }
+      .nav-actions .btn-primary { padding: 8px 12px !important; font-size: 12px !important; white-space: nowrap !important; }
+      .nav-actions a[href*="after-hours"] { padding: 7px 10px !important; font-size: 12px !important; white-space: nowrap !important; }.hamburger{display:flex;}}
+    @media(max-width:640px){.nav-inner,.page-hero,.services-section{padding-left:20px;padding-right:20px;}.service-card{padding:28px 24px 32px;}.service-card-inner{flex-direction:column;align-items:flex-start;gap:16px;}.service-card-inner>div{max-width:100%;}.service-card-cta{align-self:flex-start;}}
+  </style>
+</head>
+<body>
+
+<div id="mobile-backdrop" class="mobile-backdrop"></div>
+<nav id="mobile-menu" class="mobile-menu" role="dialog" aria-modal="true">
+  <div class="mobile-menu-top">
+    <a href="/"><img src="brand_assets/ChiroActive Logo.png" alt="ChiroActive" /></a>
+    <button id="mobile-close" class="mobile-close" aria-label="Close menu">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 2L14 14M14 2L2 14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+  <div class="mobile-nav-body">
+    <a href="/" class="mobile-nav-link">Home</a>
+    <details class="mobile-nav-details">
+      <summary>Conditions<svg class="chevron" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+      <div class="mobile-nav-sub">
+        <a href="/lower-back-pain">Lower Back Pain</a>
+        <a href="/neck-pain">Desk-related pain</a>
+        <a href="/headaches-posture">Headaches &amp; Posture</a>
+        <a href="/stiffness-mobility">Stiffness &amp; Mobility</a>
+      </div>
+    </details>
+    <details class="mobile-nav-details">
+      <summary>Services<svg class="chevron" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+      <div class="mobile-nav-sub">
+        <a href="/chiropractic-care">Chiropractic Care</a>
+        <a href="/flexion-distraction">Flexion Distraction</a>
+        <a href="/manual-adjustments">Manual Adjustments</a>
+        <a href="/foot-levelers">Foot Levelers</a>
+        <a href="/k-laser-therapy">K-Laser Therapy</a>
+        <a href="/after-hours-care">After-Hours Care</a>
+      </div>
+    </details>
+    <a href="/about" class="mobile-nav-link">About</a>
+    <a href="/faq" class="mobile-nav-link">FAQ</a>
+    <a href="/contact" class="mobile-nav-link">Contact</a>
+    <a href="/useful-links" class="mobile-nav-link">Useful Links</a>
+    <div class="mobile-nav-footer">
+      <a href="tel:0883744033" class="btn btn-primary" style="display:block;text-align:center;margin-bottom:16px;">Book an Appointment</a>
+      <div class="mobile-contact-line"><a href="tel:0883744033">(08) 8374 4033</a></div>
+    </div>
+  </div>
+</nav>
+
+<header id="site-nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo"><img src="brand_assets/ChiroActive Logo.png" alt="ChiroActive" /></a>
+    <nav class="nav-links">
+      <a href="/" class="nav-link">Home</a>
+      <div class="nav-dropdown-wrap">
+        <button class="nav-link nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">Conditions<svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="nav-dropdown" role="menu">
+          <a href="/lower-back-pain" role="menuitem">Lower Back Pain</a>
+          <a href="/neck-pain" role="menuitem">Desk-related pain</a>
+          <a href="/headaches-posture" role="menuitem">Headaches &amp; Posture</a>
+          <a href="/stiffness-mobility" role="menuitem">Stiffness &amp; Mobility</a>
+        </div>
+      </div>
+      <div class="nav-dropdown-wrap">
+        <button class="nav-link nav-dropdown-trigger active" aria-haspopup="true" aria-expanded="false">Services<svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="nav-dropdown" role="menu">
+          <a href="/chiropractic-care" role="menuitem">Chiropractic Care</a>
+          <a href="/flexion-distraction" role="menuitem">Flexion Distraction</a>
+          <a href="/manual-adjustments" role="menuitem">Manual Adjustments</a>
+          <a href="/foot-levelers" role="menuitem">Foot Levelers</a>
+          <a href="/k-laser-therapy" role="menuitem">K-Laser Therapy</a>
+          <a href="/after-hours-care" role="menuitem">After-Hours Care</a>
+        </div>
+      </div>
+      <a href="/about" class="nav-link">About</a>
+      <a href="/faq" class="nav-link">FAQ</a>
+      <a href="/contact" class="nav-link">Contact</a>
+      <a href="/useful-links" class="nav-link">Useful Links</a>
+    </nav>
+    <div class="nav-actions">
+      <a href="tel:0883744033" class="btn btn-primary" style="padding:10px 20px;font-size:14px;">Book Appointment</a>
+      <a href="/after-hours-care" class="btn-after-hours" style="display:inline-flex;align-items:center;font-family:'Outfit',sans-serif;font-weight:600;font-size:13px;color:var(--navy);border:1.5px solid rgba(27,58,112,0.25);border-radius:7px;padding:8px 14px;transition:border-color .18s,background .18s;" onmouseover="this.style.background='var(--navy-faint)'" onmouseout="this.style.background=''">After Hours</a>
+      <button id="hamburger" class="hamburger" aria-label="Open menu">
+        <svg width="20" height="14" viewBox="0 0 20 14" fill="none"><path d="M0 1H20M0 7H20M0 13H20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="container">
+    <p class="page-hero-label">What we offer</p>
+    <h1>Services at ChiroActive</h1>
+    <p>We use a range of proven techniques tailored to each patient. Every approach is chosen based on what's right for you — not a one-size-fits-all protocol.</p>
+  </div>
+</section>
+
+<section class="services-section">
+  <div class="container">
+
+    <a href="/chiropractic-care" class="service-card service-card-link">
+      <div class="service-card-inner">
+        <div>
+          <span class="service-badge">Core service</span>
+          <h2>Chiropractic Care</h2>
+          <p>
+            Manual chiropractic adjustments to restore normal joint movement, reduce pain, and improve function. Techniques are chosen based on your specific condition — including gentler, low-force options for those who prefer them.
+          </p>
+        </div>
+        <span class="service-card-cta">Learn more <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7H11M8 4L11 7L8 10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </div>
+    </a>
+
+    <a href="/flexion-distraction" class="service-card service-card-link">
+      <div class="service-card-inner">
+        <div>
+          <span class="service-badge">Specialised</span>
+          <h2>Flexion Distraction</h2>
+          <p>
+            A gentle, hands-on spinal decompression technique particularly effective for disc problems, sciatica, and lower back pain. Rhythmic, controlled movements on a specially designed Cox table — no high-velocity manipulation.
+          </p>
+        </div>
+        <span class="service-card-cta">Learn more <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7H11M8 4L11 7L8 10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </div>
+    </a>
+
+    <a href="/manual-adjustments" class="service-card service-card-link">
+      <div class="service-card-inner">
+        <div>
+          <span class="service-badge">Core service</span>
+          <h2>Manual Adjustments</h2>
+          <p>
+            Targeted, hands-on spinal and extremity adjustments to restore joint mobility and reduce nerve irritation. A precise, skilled approach refined over 30+ years of practice — tailored to what your body needs on the day.
+          </p>
+        </div>
+        <span class="service-card-cta">Learn more <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7H11M8 4L11 7L8 10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </div>
+    </a>
+
+    <a href="/foot-levelers" class="service-card service-card-link">
+      <div class="service-card-inner">
+        <div>
+          <span class="service-badge">Orthotics</span>
+          <h2>Foot Levelers Orthotics</h2>
+          <p>
+            Custom-made functional orthotics designed to support all three arches of the foot, improving balance and alignment from the ground up. Prescribed and fitted in-clinic after a thorough foot scan and assessment.
+          </p>
+        </div>
+        <span class="service-card-cta">Learn more <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7H11M8 4L11 7L8 10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </div>
+    </a>
+
+    <a href="/k-laser-therapy" class="service-card service-card-link">
+      <div class="service-card-inner">
+        <div>
+          <span class="service-badge">Specialised technology</span>
+          <h2>K-Laser Therapy</h2>
+          <p>
+            Class IV therapeutic laser treatment that promotes healing, reduces inflammation, and relieves pain using targeted light energy. Non-invasive and drug-free — used for sports injuries, joint pain, and soft tissue conditions.
+          </p>
+        </div>
+        <span class="service-card-cta">Learn more <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7H11M8 4L11 7L8 10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </div>
+    </a>
+
+    <a href="/after-hours-care" class="service-card service-card-link">
+      <div class="service-card-inner">
+        <div>
+          <span class="service-badge">Availability</span>
+          <h2>After-Hours Care</h2>
+          <p>
+            Pain doesn't follow business hours. After-hours appointments are available by arrangement — call or SMS to discuss your situation and we'll do our best to accommodate you outside regular clinic times.
+          </p>
+        </div>
+        <span class="service-card-cta">Learn more <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7H11M8 4L11 7L8 10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </div>
+    </a>
+
+    <div class="services-cta">
+      <h3>Not sure which service is right for you?</h3>
+      <p>Book a first appointment and we'll assess your situation properly and recommend the best approach for you.</p>
+      <a href="tel:0883744033" class="btn btn-primary" style="font-size:16px;padding:14px 28px;">Book an Appointment</a>
+      <p style="font-size:13px;color:var(--quiet);margin-top:14px;">(08) 8374 4033 &nbsp;·&nbsp; enquiries@chiroactive.com.au</p>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <img src="brand_assets/ChiroActive Logo Transparent.png" alt="ChiroActive" style="height:38px;width:auto;opacity:0.85;" />
+      <p>Experienced chiropractic care in Adelaide's suburbs. Serving the community since 1994.</p>
+      <div class="footer-contact-item">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 2.5C2 2.5 3 4.5 5 6.5C7 8.5 9 9.5 10.5 10L12 8.5L11 7.5C11 7.5 9.5 8.5 8.5 7.5C7.5 6.5 8 5.5 8 5.5L7 4.5L5.5 6C5 4.5 4 3 2 2.5Z" stroke="rgba(255,255,255,0.4)" stroke-width="1.3" stroke-linejoin="round"/></svg>
+        <a href="tel:0883744033">(08) 8374 4033</a>
+      </div>
+      <div class="footer-contact-item">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><rect x="1.5" y="3" width="11" height="8" rx="1.5" stroke="rgba(255,255,255,0.4)" stroke-width="1.3"/><path d="M1.5 5L7 8.5L12.5 5" stroke="rgba(255,255,255,0.4)" stroke-width="1.3" stroke-linecap="round"/></svg>
+        <a href="mailto:enquiries@chiroactive.com.au">enquiries@chiroactive.com.au</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Conditions</h4>
+      <a href="/lower-back-pain">Lower Back Pain</a>
+      <a href="/neck-pain">Desk-related pain</a>
+      <a href="/headaches-posture">Headaches &amp; Posture</a>
+      <a href="/stiffness-mobility">Stiffness &amp; Mobility</a>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <a href="/chiropractic-care">Chiropractic Care</a>
+      <a href="/flexion-distraction">Flexion Distraction</a>
+      <a href="/manual-adjustments">Manual Adjustments</a>
+      <a href="/foot-levelers">Foot Levelers</a>
+      <a href="/k-laser-therapy">K-Laser Therapy</a>
+      <a href="/after-hours-care">After-Hours Care</a>
+    </div>
+    <div class="footer-col">
+      <h4>Clinic</h4>
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="/faq">FAQ</a>
+      <a href="/contact">Contact</a>
+      <a href="/useful-links">Useful Links</a>
+      <a href="/privacy-policy">Privacy Policy</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 ChiroActive. All rights reserved. · Adelaide, SA</p>
+    <p>ABN &middot; AHPRA registered practitioner</p>
+  </div>
+</footer>
+
+<script>
+  const h=document.getElementById('hamburger'),m=document.getElementById('mobile-menu'),b=document.getElementById('mobile-backdrop'),c=document.getElementById('mobile-close');
+  function open(){m.classList.add('open');b.classList.add('open');document.body.style.overflow='hidden';}
+  function close(){m.classList.remove('open');b.classList.remove('open');document.body.style.overflow='';}
+  h.addEventListener('click',open);c.addEventListener('click',close);b.addEventListener('click',close);
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')close();});
+</script>
+</body>
+</html>

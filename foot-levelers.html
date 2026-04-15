@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Foot Levelers Orthotics — ChiroActive</title>
+  <meta name="description" content="Custom Foot Levelers orthotics in Adelaide. Prescribed and fitted in-clinic after a thorough foot scan." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root{--navy:#1B3A70;--navy-dark:#122856;--navy-faint:#EEF2FA;--green:#6EB534;--green-dark:#4F8A20;--green-faint:#EDF7E3;--bg:#F8F7F2;--text:#191D2C;--muted:#5B6278;--quiet:#8B94A8;--border:#E2DDD3;--border-soft:#EDE9E1;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Outfit',system-ui,sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;}
+    a{text-decoration:none;color:inherit;}
+    .f-display{font-family:'Fraunces',Georgia,serif;}
+    .container{max-width:1160px;margin:0 auto;padding:0 32px;}
+    #site-nav{position:sticky;top:0;z-index:300;background:rgba(255,255,255,0.97);backdrop-filter:blur(14px);border-bottom:1px solid var(--border-soft);box-shadow:0 1px 16px rgba(27,58,112,0.06);}
+    .nav-inner{max-width:1160px;margin:0 auto;padding:0 32px;height:70px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
+    .nav-logo img{height:44px;width:auto;}
+    .nav-links{display:flex;align-items:center;gap:4px;flex:1;justify-content:center;}
+    .nav-link{font-size:14px;font-weight:500;color:var(--muted);padding:6px 12px;border-radius:6px;transition:color .18s,background .18s;}
+    .nav-link:hover,.nav-link.active{color:var(--navy);background:var(--navy-faint);}
+    .nav-dropdown-wrap{position:relative;}
+    .nav-dropdown-trigger{display:flex;align-items:center;gap:4px;cursor:pointer;user-select:none;background:none;}
+    .nav-dropdown-trigger svg{transition:transform .2s ease;}
+    .nav-dropdown-wrap:hover .nav-dropdown-trigger svg,.nav-dropdown-wrap:focus-within .nav-dropdown-trigger svg{transform:rotate(180deg);}
+    .nav-dropdown{position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%) translateY(-4px);background:white;border:1px solid var(--border);border-radius:10px;box-shadow:0 8px 28px rgba(27,58,112,0.1),0 2px 8px rgba(0,0,0,0.06);min-width:220px;padding:6px;opacity:0;visibility:hidden;transition:opacity .16s ease,visibility .16s ease,transform .16s ease;}
+    .nav-dropdown-wrap:hover .nav-dropdown,.nav-dropdown-wrap:focus-within .nav-dropdown{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0);}
+    .nav-dropdown a{display:block;padding:9px 14px;font-size:14px;font-weight:500;color:var(--muted);border-radius:7px;transition:background .15s,color .15s;}
+    .nav-dropdown a:hover{background:var(--navy-faint);color:var(--navy);}
+    .nav-actions{display:flex;align-items:center;gap:12px;margin-left:auto;}
+    .btn{display:inline-flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif;font-weight:600;font-size:15px;border-radius:7px;padding:13px 26px;cursor:pointer;border:2px solid transparent;text-decoration:none;transition:background .18s,color .18s,transform .15s,box-shadow .18s;}
+    .btn-primary{background:var(--navy);color:white;box-shadow:0 4px 16px rgba(27,58,112,0.22);}
+    .btn-primary:hover{background:var(--navy-dark);transform:translateY(-2px);}
+    .btn-green{background:var(--green);color:white;box-shadow:0 4px 16px rgba(110,181,52,0.25);}
+    .btn-green:hover{background:var(--green-dark);transform:translateY(-2px);}
+    .hamburger{display:none;align-items:center;justify-content:center;width:40px;height:40px;border:1.5px solid var(--border);border-radius:8px;background:transparent;color:var(--navy);cursor:pointer;}
+    .mobile-backdrop{position:fixed;inset:0;background:rgba(18,28,56,0.48);z-index:400;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s;}
+    .mobile-backdrop.open{opacity:1;visibility:visible;}
+    .mobile-menu{position:fixed;top:0;right:0;width:min(320px,90vw);height:100%;background:white;z-index:500;transform:translateX(100%);transition:transform .32s cubic-bezier(0.22,1,0.36,1);box-shadow:-8px 0 48px rgba(18,28,56,0.14);display:flex;flex-direction:column;}
+    .mobile-menu.open{transform:translateX(0);}
+    .mobile-menu-top{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;border-bottom:1px solid var(--border-soft);}
+    .mobile-menu-top img{height:36px;}
+    .mobile-close{width:36px;height:36px;border:1.5px solid var(--border);border-radius:7px;background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+    .mobile-nav-body{padding:16px 16px 24px;flex:1;display:flex;flex-direction:column;}
+    .mobile-nav-link{display:block;padding:12px 14px;font-size:15px;font-weight:500;color:var(--text);border-radius:8px;transition:background .15s;}
+    .mobile-nav-link:hover,.mobile-nav-link.active{background:var(--bg);}
+    .mobile-nav-details summary{list-style:none;display:flex;align-items:center;justify-content:space-between;padding:12px 14px;font-size:15px;font-weight:500;color:var(--text);border-radius:8px;cursor:pointer;}
+    .mobile-nav-details summary::-webkit-details-marker{display:none;}
+    .mobile-nav-details[open] summary .chevron{transform:rotate(180deg);}
+    .mobile-nav-details .chevron{transition:transform .2s;}
+    .mobile-nav-sub{padding:4px 6px 8px 22px;}
+    .mobile-nav-sub a{display:block;padding:9px 12px;font-size:14px;color:var(--muted);border-radius:7px;}
+    .mobile-nav-footer{margin-top:auto;padding:20px 16px 0;border-top:1px solid var(--border-soft);}
+    .page-hero{background:var(--navy-dark);padding:72px 32px;color:white;}
+    .page-hero-label{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(110,181,52,.85);margin-bottom:14px;}
+    .page-hero h1{font-family:'Fraunces',serif;font-size:clamp(28px,3.5vw,48px);font-weight:600;letter-spacing:-.025em;line-height:1.15;max-width:700px;font-feature-settings:"calt" 0,"liga" 0;}
+    .page-hero p{font-size:17px;color:rgba(255,255,255,.65);line-height:1.72;max-width:540px;margin-top:16px;}
+    .svc-content{padding:88px 32px;}
+    .svc-intro{max-width:780px;margin-bottom:64px;}
+    .svc-intro h2{font-family:'Fraunces',serif;font-size:clamp(22px,2.4vw,32px);font-weight:600;letter-spacing:-.02em;color:var(--text);margin-bottom:16px;font-feature-settings:"calt" 0,"liga" 0;}
+    .svc-intro p{font-size:16px;color:var(--muted);line-height:1.78;margin-bottom:16px;}
+    .benefits-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:64px;}
+    .benefit-card{background:white;border:1px solid var(--border);border-radius:12px;padding:28px 24px;box-shadow:0 2px 8px rgba(27,58,112,0.04);}
+    .benefit-icon{width:44px;height:44px;background:var(--navy-faint);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;}
+    .benefit-card h3{font-family:'Fraunces',serif;font-size:17px;font-weight:600;color:var(--text);margin-bottom:8px;font-feature-settings:"calt" 0,"liga" 0;}
+    .benefit-card p{font-size:14px;color:var(--muted);line-height:1.65;}
+    .svc-cta{background:var(--navy-dark);border-radius:16px;padding:56px 48px;text-align:center;color:white;}
+    .svc-cta h2{font-family:'Fraunces',serif;font-size:clamp(24px,2.8vw,38px);font-weight:600;letter-spacing:-.02em;margin-bottom:14px;font-feature-settings:"calt" 0,"liga" 0;}
+    .svc-cta p{font-size:16px;color:rgba(255,255,255,.6);margin-bottom:28px;line-height:1.65;}
+    footer{background:#0C1D3E;color:white;}
+    .footer-top{max-width:1160px;margin:0 auto;padding:56px 32px 48px;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;}
+    .footer-brand img{height:38px;width:auto;margin-bottom:16px;}
+    .footer-brand p{font-size:14px;color:rgba(255,255,255,0.45);line-height:1.65;margin-bottom:20px;}
+    .footer-contact-item{display:flex;align-items:center;gap:8px;font-size:14px;color:rgba(255,255,255,0.55);margin-bottom:8px;}
+    .footer-contact-item a{color:rgba(255,255,255,0.7);transition:color 0.2s;}
+    .footer-contact-item a:hover{color:white;}
+    .footer-col h4{font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:16px;}
+    .footer-col a{display:block;font-size:14px;color:rgba(255,255,255,0.55);padding:4px 0;transition:color 0.18s;}
+    .footer-col a:hover{color:rgba(255,255,255,0.9);}
+    .footer-bottom{border-top:1px solid rgba(255,255,255,0.07);padding:20px 32px;max-width:1160px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+    .footer-bottom p{font-size:13px;color:rgba(255,255,255,0.28);}
+    @media(max-width:1060px){.footer-top{grid-template-columns:1fr 1fr;}}
+    @media(max-width:640px){footer .footer-top{padding:40px 20px 36px;grid-template-columns:1fr;gap:32px;}footer .footer-bottom{padding:18px 20px;flex-direction:column;text-align:center;}}
+    .video-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin:48px 0;}
+    .video-wrap{border-radius:12px;overflow:hidden;aspect-ratio:16/9;box-shadow:0 4px 16px rgba(27,58,112,0.1);}
+    .video-wrap iframe{width:100%;height:100%;border:0;}
+    @media(max-width:900px){.video-grid{grid-template-columns:1fr;}}
+    @media(max-width:900px){.nav-links{display:none;}
+      .nav-logo { display: none; }
+      .nav-actions .btn-primary { padding: 8px 12px !important; font-size: 12px !important; white-space: nowrap !important; }
+      .nav-actions a[href*="after-hours"] { padding: 7px 10px !important; font-size: 12px !important; white-space: nowrap !important; }.hamburger{display:flex;}.benefits-grid{grid-template-columns:1fr 1fr;}}
+    @media(max-width:640px){.nav-inner,.page-hero,.svc-content{padding-left:20px;padding-right:20px;}.benefits-grid{grid-template-columns:1fr;}.svc-cta{padding:40px 24px;}}
+  </style>
+</head>
+<body>
+
+<div id="mobile-backdrop" class="mobile-backdrop"></div>
+<nav id="mobile-menu" class="mobile-menu" role="dialog" aria-modal="true">
+  <div class="mobile-menu-top">
+    <a href="/"><img src="brand_assets/ChiroActive Logo.png" alt="ChiroActive" /></a>
+    <button id="mobile-close" class="mobile-close" aria-label="Close menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 2L14 14M14 2L2 14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+  </div>
+  <div class="mobile-nav-body">
+    <a href="/" class="mobile-nav-link">Home</a>
+    <details class="mobile-nav-details">
+      <summary>Conditions<svg class="chevron" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+      <div class="mobile-nav-sub">
+        <a href="/lower-back-pain">Lower Back Pain</a>
+        <a href="/neck-pain">Desk-related pain</a>
+        <a href="/headaches-posture">Headaches &amp; Posture</a>
+        <a href="/stiffness-mobility">Stiffness &amp; Mobility</a>
+      </div>
+    </details>
+    <details class="mobile-nav-details">
+      <summary>Services<svg class="chevron" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+      <div class="mobile-nav-sub">
+        <a href="/chiropractic-care">Chiropractic Care</a>
+        <a href="/flexion-distraction">Flexion Distraction</a>
+        <a href="/manual-adjustments">Manual Adjustments</a>
+        <a href="/foot-levelers">Foot Levelers</a>
+        <a href="/k-laser-therapy">K-Laser Therapy</a>
+        <a href="/after-hours-care">After-Hours Care</a>
+      </div>
+    </details>
+    <a href="/about" class="mobile-nav-link">About</a>
+    <a href="/faq" class="mobile-nav-link">FAQ</a>
+    <a href="/contact" class="mobile-nav-link">Contact</a>
+    <a href="/useful-links" class="mobile-nav-link">Useful Links</a>
+    <div class="mobile-nav-footer">
+      <a href="tel:0883744033" class="btn btn-primary" style="display:block;text-align:center;margin-bottom:16px;">Book an Appointment</a>
+    </div>
+  </div>
+</nav>
+
+<header id="site-nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo"><img src="brand_assets/ChiroActive Logo.png" alt="ChiroActive" /></a>
+    <nav class="nav-links">
+      <a href="/" class="nav-link">Home</a>
+      <div class="nav-dropdown-wrap">
+        <button class="nav-link nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">Conditions<svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="nav-dropdown" role="menu">
+          <a href="/lower-back-pain" role="menuitem">Lower Back Pain</a>
+          <a href="/neck-pain" role="menuitem">Desk-related pain</a>
+          <a href="/headaches-posture" role="menuitem">Headaches &amp; Posture</a>
+          <a href="/stiffness-mobility" role="menuitem">Stiffness &amp; Mobility</a>
+        </div>
+      </div>
+      <div class="nav-dropdown-wrap">
+        <button class="nav-link nav-dropdown-trigger active" aria-haspopup="true" aria-expanded="false">Services<svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="nav-dropdown" role="menu">
+          <a href="/chiropractic-care" role="menuitem">Chiropractic Care</a>
+          <a href="/flexion-distraction" role="menuitem">Flexion Distraction</a>
+          <a href="/manual-adjustments" role="menuitem">Manual Adjustments</a>
+          <a href="/foot-levelers" role="menuitem">Foot Levelers</a>
+          <a href="/k-laser-therapy" role="menuitem">K-Laser Therapy</a>
+          <a href="/after-hours-care" role="menuitem">After-Hours Care</a>
+        </div>
+      </div>
+      <a href="/about" class="nav-link">About</a>
+      <a href="/faq" class="nav-link">FAQ</a>
+      <a href="/contact" class="nav-link">Contact</a>
+      <a href="/useful-links" class="nav-link">Useful Links</a>
+    </nav>
+    <div class="nav-actions">
+      <a href="tel:0883744033" class="btn btn-primary" style="padding:10px 20px;font-size:14px;">Book Appointment</a>
+      <a href="/after-hours-care" class="btn-after-hours" style="display:inline-flex;align-items:center;font-family:'Outfit',sans-serif;font-weight:600;font-size:13px;color:var(--navy);border:1.5px solid rgba(27,58,112,0.25);border-radius:7px;padding:8px 14px;transition:border-color .18s,background .18s;" onmouseover="this.style.background='var(--navy-faint)'" onmouseout="this.style.background=''">After Hours</a>
+      <button id="hamburger" class="hamburger" aria-label="Open menu"><svg width="20" height="14" viewBox="0 0 20 14" fill="none"><path d="M0 1H20M0 7H20M0 13H20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="container">
+    <p class="page-hero-label">Service</p>
+    <h1>Foot Levelers Orthotics</h1>
+    <p>Custom-made functional orthotics that support all three arches of the foot, improving alignment from the ground up.</p>
+  </div>
+</section>
+
+<section class="svc-content">
+  <div class="container">
+    <div class="svc-intro">
+      <h2>What are Foot Levelers orthotics?</h2>
+      <p>Foot Levelers are custom-made functional orthotics that support all three arches of the foot simultaneously — the medial longitudinal arch, the lateral longitudinal arch, and the anterior transverse arch. Most off-the-shelf insoles only address one arch.</p>
+      <p>Because your feet are the foundation of your body, misalignment at the foot level can contribute to problems all the way up — knees, hips, lower back, and even posture. Foot Levelers orthotics are designed to correct this from the ground up, supporting better alignment throughout the kinetic chain.</p>
+      <p>At ChiroActive, we conduct a thorough foot scan and assessment before prescribing orthotics. Every pair is made to your specific measurements, ensuring the right support for your unique foot structure.</p>
+    </div>
+
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <div class="benefit-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M11 3l-5 8h5l-2 6 6-9h-5l1-5z" stroke="var(--navy)" stroke-width="1.4" stroke-linejoin="round"/></svg></div>
+        <h3>Whole-body alignment</h3>
+        <p>Better foot support means better alignment throughout the knees, hips, and spine — not just comfort underfoot.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="6" r="3" stroke="var(--navy)" stroke-width="1.5"/><path d="M4 17c0-3.314 2.686-6 6-6s6 2.686 6 6" stroke="var(--navy)" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <h3>Custom-made for you</h3>
+        <p>Prescribed based on a detailed foot scan taken in-clinic. Fitted to your exact foot dimensions and lifestyle requirements.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="var(--navy)" stroke-width="1.5"/><path d="M10 6v4l2.5 2.5" stroke="var(--navy)" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <h3>Durable &amp; long-lasting</h3>
+        <p>Foot Levelers orthotics are built for daily wear — in work shoes, athletic shoes, and casual footwear.</p>
+      </div>
+    </div>
+
+    <div class="video-grid">
+      <div class="video-wrap">
+        <iframe src="https://www.youtube.com/embed/YHEqWPZ9xOI" title="Foot Levelers overview" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-wrap">
+        <iframe src="https://www.youtube.com/embed/dsS1d6qepkU" title="Foot Levelers benefits" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-wrap">
+        <iframe src="https://www.youtube.com/embed/c8943c9krnw" title="Custom orthotics explained" allowfullscreen loading="lazy"></iframe>
+      </div>
+    </div>
+
+    
+    </div>
+
+    <div class="svc-cta">
+      <h2>Ready to feel better?</h2>
+      <p>Book a foot assessment and we'll scan your feet, discuss your symptoms, and prescribe the right orthotics for you.</p>
+      <a href="tel:0883744033" class="btn btn-green" style="font-size:16px;padding:14px 32px;">Book an Appointment</a>
+      <p style="font-size:13px;color:rgba(255,255,255,.35);margin-top:16px;">(08) 8374 4033 &nbsp;·&nbsp; enquiries@chiroactive.com.au</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <img src="brand_assets/ChiroActive Logo Transparent.png" alt="ChiroActive" style="height:38px;width:auto;opacity:0.85;" />
+      <p>Experienced chiropractic care in Adelaide's suburbs. Serving the community since 1994.</p>
+      <div class="footer-contact-item">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 2.5C2 2.5 3 4.5 5 6.5C7 8.5 9 9.5 10.5 10L12 8.5L11 7.5C11 7.5 9.5 8.5 8.5 7.5C7.5 6.5 8 5.5 8 5.5L7 4.5L5.5 6C5 4.5 4 3 2 2.5Z" stroke="rgba(255,255,255,0.4)" stroke-width="1.3" stroke-linejoin="round"/></svg>
+        <a href="tel:0883744033">(08) 8374 4033</a>
+      </div>
+      <div class="footer-contact-item">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><rect x="1.5" y="3" width="11" height="8" rx="1.5" stroke="rgba(255,255,255,0.4)" stroke-width="1.3"/><path d="M1.5 5L7 8.5L12.5 5" stroke="rgba(255,255,255,0.4)" stroke-width="1.3" stroke-linecap="round"/></svg>
+        <a href="mailto:enquiries@chiroactive.com.au">enquiries@chiroactive.com.au</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Conditions</h4>
+      <a href="/lower-back-pain">Lower Back Pain</a>
+      <a href="/neck-pain">Desk-related pain</a>
+      <a href="/headaches-posture">Headaches &amp; Posture</a>
+      <a href="/stiffness-mobility">Stiffness &amp; Mobility</a>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <a href="/chiropractic-care">Chiropractic Care</a>
+      <a href="/flexion-distraction">Flexion Distraction</a>
+      <a href="/manual-adjustments">Manual Adjustments</a>
+      <a href="/foot-levelers">Foot Levelers</a>
+      <a href="/k-laser-therapy">K-Laser Therapy</a>
+      <a href="/after-hours-care">After-Hours Care</a>
+    </div>
+    <div class="footer-col">
+      <h4>Clinic</h4>
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="/faq">FAQ</a>
+      <a href="/contact">Contact</a>
+      <a href="/useful-links">Useful Links</a>
+      <a href="/privacy-policy">Privacy Policy</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 ChiroActive. All rights reserved. · Adelaide, SA</p>
+    <p>ABN &middot; AHPRA registered practitioner</p>
+  </div>
+</footer>
+
+<script>
+  const h=document.getElementById('hamburger'),m=document.getElementById('mobile-menu'),b=document.getElementById('mobile-backdrop'),c=document.getElementById('mobile-close');
+  function openN(){m.classList.add('open');b.classList.add('open');document.body.style.overflow='hidden';}
+  function closeN(){m.classList.remove('open');b.classList.remove('open');document.body.style.overflow='';}
+  h.addEventListener('click',openN);c.addEventListener('click',closeN);b.addEventListener('click',closeN);
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeN();});
+</script>
+</body>
+</html>

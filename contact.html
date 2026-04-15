@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — ChiroActive Adelaide</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root{--navy:#1B3A70;--navy-dark:#122856;--navy-faint:#EEF2FA;--green:#6EB534;--green-dark:#4F8A20;--green-faint:#EDF7E3;--bg:#F8F7F2;--text:#191D2C;--muted:#5B6278;--border:#E2DDD3;--border-soft:#EDE9E1;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Outfit',system-ui,sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;}
+    a{text-decoration:none;color:inherit;}
+    .container{max-width:1160px;margin:0 auto;padding:0 32px;}
+    #site-nav{position:sticky;top:0;z-index:300;background:rgba(255,255,255,0.97);backdrop-filter:blur(14px);border-bottom:1px solid var(--border-soft);box-shadow:0 1px 16px rgba(27,58,112,0.06);}
+    .nav-inner{max-width:1160px;margin:0 auto;padding:0 32px;height:70px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
+    .nav-logo img{height:44px;}
+    .nav-links{display:flex;align-items:center;gap:4px;flex:1;justify-content:center;}
+    .nav-link{font-size:14px;font-weight:500;color:var(--muted);padding:6px 12px;border-radius:6px;transition:color .18s,background .18s;}
+    .nav-link:hover,.nav-link.active{color:var(--navy);background:var(--navy-faint);}
+    .nav-dropdown-wrap{position:relative;}
+    .nav-dropdown-trigger{display:flex;align-items:center;gap:4px;cursor:pointer;user-select:none;background:none;}
+    .nav-dropdown-trigger svg{transition:transform .2s ease;}
+    .nav-dropdown-wrap:hover .nav-dropdown-trigger svg,.nav-dropdown-wrap:focus-within .nav-dropdown-trigger svg{transform:rotate(180deg);}
+    .nav-dropdown{position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%) translateY(-4px);background:white;border:1px solid var(--border);border-radius:10px;box-shadow:0 8px 28px rgba(27,58,112,0.1),0 2px 8px rgba(0,0,0,0.06);min-width:220px;padding:6px;opacity:0;visibility:hidden;transition:opacity .16s ease,visibility .16s ease,transform .16s ease;}
+    .nav-dropdown-wrap:hover .nav-dropdown,.nav-dropdown-wrap:focus-within .nav-dropdown{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0);}
+    .nav-dropdown a{display:block;padding:9px 14px;font-size:14px;font-weight:500;color:var(--muted);border-radius:7px;transition:background .15s,color .15s;}
+    .nav-dropdown a:hover{background:var(--navy-faint);color:var(--navy);}
+    .nav-actions{display:flex;align-items:center;gap:12px;margin-left:auto;}
+    .btn{display:inline-flex;align-items:center;font-family:'Outfit',sans-serif;font-weight:600;font-size:15px;border-radius:7px;padding:13px 26px;cursor:pointer;border:2px solid transparent;text-decoration:none;transition:background .18s,transform .15s;}
+    .btn-primary{background:var(--navy);color:white;}
+    .btn-primary:hover{background:var(--navy-dark);transform:translateY(-2px);}
+    .btn-green{background:var(--green);color:white;}
+    .btn-green:hover{background:var(--green-dark);transform:translateY(-2px);}
+    .hamburger{display:none;align-items:center;justify-content:center;width:40px;height:40px;border:1.5px solid var(--border);border-radius:8px;background:transparent;color:var(--navy);cursor:pointer;}
+    .mobile-backdrop{position:fixed;inset:0;background:rgba(18,28,56,0.48);z-index:400;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s;}
+    .mobile-backdrop.open{opacity:1;visibility:visible;}
+    .mobile-menu{position:fixed;top:0;right:0;width:min(320px,90vw);height:100%;background:white;z-index:500;transform:translateX(100%);transition:transform .32s cubic-bezier(0.22,1,0.36,1);box-shadow:-8px 0 48px rgba(18,28,56,0.14);display:flex;flex-direction:column;}
+    .mobile-menu.open{transform:translateX(0);}
+    .mobile-menu-top{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;border-bottom:1px solid var(--border-soft);}
+    .mobile-menu-top img{height:36px;}
+    .mobile-close{width:36px;height:36px;border:1.5px solid var(--border);border-radius:7px;background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+    .mobile-nav-body{padding:16px 16px 24px;flex:1;display:flex;flex-direction:column;}
+    .mobile-nav-link{display:block;padding:12px 14px;font-size:15px;font-weight:500;color:var(--text);border-radius:8px;}
+    .mobile-nav-details summary{list-style:none;display:flex;align-items:center;justify-content:space-between;padding:12px 14px;font-size:15px;font-weight:500;border-radius:8px;cursor:pointer;}
+    .mobile-nav-details summary::-webkit-details-marker{display:none;}
+    .mobile-nav-details[open] summary .chevron{transform:rotate(180deg);}
+    .mobile-nav-details .chevron{transition:transform .2s;}
+    .mobile-nav-sub{padding:4px 6px 8px 22px;}
+    .mobile-nav-sub a{display:block;padding:9px 12px;font-size:14px;color:var(--muted);border-radius:7px;}
+    .mobile-nav-footer{margin-top:auto;padding:20px 16px 0;border-top:1px solid var(--border-soft);}
+    .page-hero{background:var(--navy-dark);padding:72px 32px;color:white;}
+    .page-hero-label{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(110,181,52,.85);margin-bottom:14px;}
+    .page-hero h1{font-family:'Fraunces',serif;font-size:clamp(28px,3.5vw,48px);font-weight:600;letter-spacing:-.025em;line-height:1.15;}
+    .contact-section{padding:88px 32px;}
+    .contact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:56px;align-items:start;}
+    .contact-details h2{font-family:'Fraunces',serif;font-size:clamp(22px,2.4vw,32px);font-weight:600;letter-spacing:-.02em;color:var(--text);margin-bottom:28px;}
+    .contact-item{display:flex;align-items:flex-start;gap:14px;margin-bottom:24px;}
+    .contact-item-icon{width:40px;height:40px;border-radius:9px;background:var(--green-faint);border:1px solid rgba(110,181,52,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+    .contact-item-text label{display:block;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green-dark);margin-bottom:4px;}
+    .contact-item-text p,.contact-item-text a{font-size:16px;color:var(--text);font-weight:500;line-height:1.5;}
+    .contact-item-text a:hover{color:var(--navy);text-decoration:underline;}
+    .contact-form{background:white;border:1px solid var(--border);border-radius:12px;padding:36px 32px;box-shadow:0 2px 10px rgba(27,58,112,0.05);}
+    .contact-form h3{font-family:'Fraunces',serif;font-size:22px;font-weight:600;color:var(--text);margin-bottom:24px;}
+    .form-group{margin-bottom:20px;}
+    .form-group label{display:block;font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px;}
+    .form-group input,.form-group textarea,.form-group select{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:8px;font-family:'Outfit',sans-serif;font-size:15px;color:var(--text);background:var(--bg);transition:border-color .2s;}
+    .form-group input:focus,.form-group textarea:focus{outline:none;border-color:var(--navy);}
+    .form-group textarea{resize:vertical;min-height:100px;}
+    .form-note{font-size:13px;color:var(--muted);margin-top:12px;font-style:italic;}
+        footer{background:#0C1D3E;color:white;}
+    .footer-top{max-width:1160px;margin:0 auto;padding:56px 32px 48px;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;}
+    .footer-brand img{height:38px;width:auto;margin-bottom:16px;}
+    .footer-brand p{font-size:14px;color:rgba(255,255,255,0.45);line-height:1.65;margin-bottom:20px;}
+    .footer-contact-item{display:flex;align-items:center;gap:8px;font-size:14px;color:rgba(255,255,255,0.55);margin-bottom:8px;}
+    .footer-contact-item a{color:rgba(255,255,255,0.7);transition:color 0.2s;}
+    .footer-contact-item a:hover{color:white;}
+    .footer-col h4{font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:16px;}
+    .footer-col a{display:block;font-size:14px;color:rgba(255,255,255,0.55);padding:4px 0;transition:color 0.18s;}
+    .footer-col a:hover{color:rgba(255,255,255,0.9);}
+    .footer-bottom{border-top:1px solid rgba(255,255,255,0.07);padding:20px 32px;max-width:1160px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+    .footer-bottom p{font-size:13px;color:rgba(255,255,255,0.28);}
+    @media(max-width:1060px){.footer-top{grid-template-columns:1fr 1fr;}}
+    @media(max-width:640px){footer .footer-top{padding:40px 20px 36px;grid-template-columns:1fr;gap:32px;}footer .footer-bottom{padding:18px 20px;flex-direction:column;text-align:center;}}
+    @media(max-width:900px){.nav-links{display:none;}
+      .nav-logo { display: none; }
+      .nav-actions .btn-primary { padding: 8px 12px !important; font-size: 12px !important; white-space: nowrap !important; }
+      .nav-actions a[href*="after-hours"] { padding: 7px 10px !important; font-size: 12px !important; white-space: nowrap !important; }.hamburger{display:flex;}.contact-grid{grid-template-columns:1fr;gap:40px;}}
+    @media(max-width:640px){.nav-inner,.page-hero,.contact-section{padding-left:20px;padding-right:20px;}.contact-form{padding:28px 24px;}}
+  </style>
+</head>
+<body>
+<div id="mobile-backdrop" class="mobile-backdrop"></div>
+<nav id="mobile-menu" class="mobile-menu" role="dialog" aria-modal="true">
+  <div class="mobile-menu-top"><a href="/"><img src="brand_assets/ChiroActive Logo.png" alt="ChiroActive" /></a><button id="mobile-close" class="mobile-close"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 2L14 14M14 2L2 14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></div>
+  <div class="mobile-nav-body">
+    <a href="/" class="mobile-nav-link">Home</a>
+    <details class="mobile-nav-details"><summary>Conditions<svg class="chevron" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+      <div class="mobile-nav-sub"><a href="/lower-back-pain">Lower Back Pain</a><a href="/neck-pain">Desk-related pain</a><a href="/headaches-posture">Headaches &amp; Posture</a><a href="/stiffness-mobility">Stiffness &amp; Mobility</a></div>
+    </details>
+    <details class="mobile-nav-details">
+      <summary>Services<svg class="chevron" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+      <div class="mobile-nav-sub">
+        <a href="/chiropractic-care">Chiropractic Care</a>
+        <a href="/flexion-distraction">Flexion Distraction</a>
+        <a href="/manual-adjustments">Manual Adjustments</a>
+        <a href="/foot-levelers">Foot Levelers</a>
+        <a href="/k-laser-therapy">K-Laser Therapy</a>
+        <a href="/after-hours-care">After-Hours Care</a>
+      </div>
+    </details><a href="/about" class="mobile-nav-link">About</a><a href="/faq" class="mobile-nav-link">FAQ</a><a href="/contact" class="mobile-nav-link active">Contact</a><a href="/useful-links" class="mobile-nav-link">Useful Links</a>
+    <div class="mobile-nav-footer"><a href="tel:0883744033" class="btn btn-primary" style="display:block;text-align:center;margin-bottom:16px;">Book an Appointment</a></div>
+  </div>
+</nav>
+<header id="site-nav"><div class="nav-inner">
+  <a href="/" class="nav-logo"><img src="brand_assets/ChiroActive Logo.png" alt="ChiroActive" /></a>
+  <nav class="nav-links">
+    <a href="/" class="nav-link">Home</a>
+    <div class="nav-dropdown-wrap">
+      <button class="nav-link nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">Conditions<svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <div class="nav-dropdown" role="menu">
+        <a href="/lower-back-pain" role="menuitem">Lower Back Pain</a>
+        <a href="/neck-pain" role="menuitem">Desk-related pain</a>
+        <a href="/headaches-posture" role="menuitem">Headaches &amp; Posture</a>
+        <a href="/stiffness-mobility" role="menuitem">Stiffness &amp; Mobility</a>
+      </div>
+    </div>
+    <div class="nav-dropdown-wrap">
+        <button class="nav-link nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">Services<svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="nav-dropdown" role="menu">
+          <a href="/chiropractic-care" role="menuitem">Chiropractic Care</a>
+          <a href="/flexion-distraction" role="menuitem">Flexion Distraction</a>
+          <a href="/manual-adjustments" role="menuitem">Manual Adjustments</a>
+          <a href="/foot-levelers" role="menuitem">Foot Levelers</a>
+          <a href="/k-laser-therapy" role="menuitem">K-Laser Therapy</a>
+          <a href="/after-hours-care" role="menuitem">After-Hours Care</a>
+        </div>
+      </div><a href="/about" class="nav-link">About</a><a href="/faq" class="nav-link">FAQ</a><a href="/contact" class="nav-link active">Contact</a><a href="/useful-links" class="nav-link">Useful Links</a>
+  </nav>
+  <div class="nav-actions"><a href="tel:0883744033" class="btn btn-primary" style="padding:10px 20px;font-size:14px;">Book Appointment</a><a href="/after-hours-care" class="btn-after-hours" style="display:inline-flex;align-items:center;font-family:'Outfit',sans-serif;font-weight:600;font-size:13px;color:var(--navy);border:1.5px solid rgba(27,58,112,0.25);border-radius:7px;padding:8px 14px;transition:border-color .18s,background .18s;" onmouseover="this.style.background='var(--navy-faint)'" onmouseout="this.style.background=''">After Hours</a>
+      <button id="hamburger" class="hamburger"><svg width="20" height="14" viewBox="0 0 20 14" fill="none"><path d="M0 1H20M0 7H20M0 13H20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></div>
+</div></header>
+
+<section class="page-hero"><div class="container"><p class="page-hero-label">Get in touch</p><h1>Contact ChiroActive</h1></div></section>
+
+<section class="contact-section">
+  <div class="container">
+    <div class="contact-grid">
+
+      <div class="contact-details">
+        <h2>Get in touch</h2>
+
+        <div class="contact-item">
+          <div class="contact-item-icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2 3C2 3 3.5 5.5 5.5 7.5C7.5 9.5 10 10.5 11.5 11L13.5 9L12.5 8C12.5 8 10.5 9.5 9.5 8.5C8.5 7.5 9 6 9 6L8 5L6 7C5.5 5 4.5 3.5 2 3Z" stroke="#4F8A20" stroke-width="1.4" stroke-linejoin="round"/></svg></div>
+          <div class="contact-item-text">
+            <label>Phone</label>
+            <a href="tel:0883744033">(08) 8374 4033</a>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-item-icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2" y="4" width="14" height="10" rx="2" stroke="#4F8A20" stroke-width="1.4"/><path d="M2 6.5L9 10.5L16 6.5" stroke="#4F8A20" stroke-width="1.4" stroke-linecap="round"/></svg></div>
+          <div class="contact-item-text">
+            <label>Email</label>
+            <a href="mailto:enquiries@chiroactive.com.au">enquiries@chiroactive.com.au</a>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-item-icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2C6.2 2 4 4.2 4 7C4 10.5 9 16 9 16C9 16 14 10.5 14 7C14 4.2 11.8 2 9 2Z" stroke="#4F8A20" stroke-width="1.4" stroke-linejoin="round"/><circle cx="9" cy="7" r="2" stroke="#4F8A20" stroke-width="1.3"/></svg></div>
+          <div class="contact-item-text">
+            <label>Location</label>
+            <p>Adelaide inner southern suburbs, SA</p>
+            <p style="font-size:14px;color:var(--muted);margin-top:4px;">Contact us for the specific address and parking details.</p>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-item-icon"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7" stroke="#4F8A20" stroke-width="1.4"/><path d="M9 5V9L11.5 11" stroke="#4F8A20" stroke-width="1.4" stroke-linecap="round"/></svg></div>
+          <div class="contact-item-text">
+            <label>After-Hours</label>
+            <p>After-hours appointments available by arrangement. Call or email to discuss.</p>
+          </div>
+        </div>
+
+        <div style="margin-top:8px;padding:20px 24px;background:var(--green-faint);border:1px solid rgba(110,181,52,.25);border-radius:10px;">
+          <p style="font-size:14px;color:var(--green-dark);font-weight:600;margin-bottom:6px;">Private health rebates available</p>
+          <p style="font-size:14px;color:var(--muted);">If your extras cover includes chiropractic, we process HICAPS on the spot.</p>
+        </div>
+      </div>
+
+      <div class="contact-form">
+        <h3>Send an enquiry</h3>
+        <form action="#" method="post">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+            <div class="form-group"><label for="fname">First name</label><input type="text" id="fname" name="fname" placeholder="Jane" /></div>
+            <div class="form-group"><label for="lname">Last name</label><input type="text" id="lname" name="lname" placeholder="Smith" /></div>
+          </div>
+          <div class="form-group"><label for="email">Email</label><input type="email" id="email" name="email" placeholder="jane@example.com" /></div>
+          <div class="form-group"><label for="phone">Phone</label><input type="tel" id="phone" name="phone" placeholder="04xx xxx xxx" /></div>
+          <div class="form-group"><label for="message">How can we help?</label><textarea id="message" name="message" placeholder="Tell us a bit about what you're experiencing..."></textarea></div>
+          <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;font-size:15px;">Send Enquiry</button>
+        </form>
+        <p class="form-note">Or call us directly on <a href="tel:0883744033" style="color:var(--navy);font-weight:600;">(08) 8374 4033</a> — we're happy to answer questions before you book.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <img src="brand_assets/ChiroActive Logo Transparent.png" alt="ChiroActive" style="height:38px;width:auto;opacity:0.85;" />
+      <p>Experienced chiropractic care in Adelaide's suburbs. Serving the community since 1994.</p>
+      <div class="footer-contact-item">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 2.5C2 2.5 3 4.5 5 6.5C7 8.5 9 9.5 10.5 10L12 8.5L11 7.5C11 7.5 9.5 8.5 8.5 7.5C7.5 6.5 8 5.5 8 5.5L7 4.5L5.5 6C5 4.5 4 3 2 2.5Z" stroke="rgba(255,255,255,0.4)" stroke-width="1.3" stroke-linejoin="round"/></svg>
+        <a href="tel:0883744033">(08) 8374 4033</a>
+      </div>
+      <div class="footer-contact-item">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><rect x="1.5" y="3" width="11" height="8" rx="1.5" stroke="rgba(255,255,255,0.4)" stroke-width="1.3"/><path d="M1.5 5L7 8.5L12.5 5" stroke="rgba(255,255,255,0.4)" stroke-width="1.3" stroke-linecap="round"/></svg>
+        <a href="mailto:enquiries@chiroactive.com.au">enquiries@chiroactive.com.au</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Conditions</h4>
+      <a href="/lower-back-pain">Lower Back Pain</a>
+      <a href="/neck-pain">Desk-related pain</a>
+      <a href="/headaches-posture">Headaches &amp; Posture</a>
+      <a href="/stiffness-mobility">Stiffness &amp; Mobility</a>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <a href="/chiropractic-care">Chiropractic Care</a>
+      <a href="/flexion-distraction">Flexion Distraction</a>
+      <a href="/k-laser-therapy">K-Laser Therapy</a>
+      <a href="/after-hours-care">After-Hours Care</a>
+    </div>
+    <div class="footer-col">
+      <h4>Clinic</h4>
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="/faq">FAQ</a>
+      <a href="/contact">Contact</a>
+      <a href="/useful-links">Useful Links</a>
+      <a href="/privacy-policy">Privacy Policy</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 ChiroActive. All rights reserved. · Adelaide, SA</p>
+    <p>ABN &middot; AHPRA registered practitioner</p>
+  </div>
+</footer>
+<script>
+  const h=document.getElementById('hamburger'),m=document.getElementById('mobile-menu'),b=document.getElementById('mobile-backdrop'),c=document.getElementById('mobile-close');
+  function openN(){m.classList.add('open');b.classList.add('open');document.body.style.overflow='hidden';}
+  function closeN(){m.classList.remove('open');b.classList.remove('open');document.body.style.overflow='';}
+  h.addEventListener('click',openN);c.addEventListener('click',closeN);b.addEventListener('click',closeN);
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeN();});
+</script>
+</body>
+</html>

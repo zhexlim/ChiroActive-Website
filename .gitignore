@@ -1,0 +1,18 @@
+# macOS
+.DS_Store
+
+# Temporary screenshots
+temporary screenshots/
+
+# Dev/build scripts
+fix_mobile.py
+ss.py
+screenshot.mjs
+serve.mjs
+
+# Claude internal
+.claude/
+
+# Python cache
+__pycache__/
+*.pyc

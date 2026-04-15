@@ -1,0 +1,1570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChiroActive — Chiropractic Care in Adelaide</title>
+  <meta name="description" content="Experienced, personalised chiropractic care in Adelaide. Serving the community since 1994. Back pain, neck pain, headaches, and more." />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── TOKENS ── */
+    :root {
+      --navy:       #1B3A70;
+      --navy-dark:  #122856;
+      --navy-light: #2A4D8A;
+      --navy-faint: #EEF2FA;
+      --green:      #6EB534;
+      --green-dark: #4F8A20;
+      --green-mid:  #5A9E28;
+      --green-faint:#EDF7E3;
+      --bg:         #F8F7F2;
+      --bg-white:   #FFFFFF;
+      --text:       #191D2C;
+      --muted:      #5B6278;
+      --quiet:      #8B94A8;
+      --border:     #E2DDD3;
+      --border-soft:#EDE9E1;
+    }
+
+    /* ── RESET ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Outfit', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    /* ── TYPOGRAPHY HELPERS ── */
+    .f-display { font-family: 'Fraunces', Georgia, serif; }
+    /* Disable contextual alternates that cause the stylised 'f' in Fraunces */
+    h1, h2, h3, h4, .f-display, .hero-headline, .geoff-name, .section-heading,
+    .step-title, .cond-title, .book-heading {
+      font-feature-settings: "calt" 0, "liga" 0;
+    }
+
+    /* ── CONTAINER ── */
+    .container {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    /* ════════════════════════════════
+       NAV
+    ════════════════════════════════ */
+    #site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 300;
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border-soft);
+      box-shadow: 0 1px 16px rgba(27,58,112,0.06);
+    }
+    .nav-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 32px;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .nav-logo img { height: 44px; width: auto; display: block; }
+
+    /* Desktop nav links */
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex: 1;
+      justify-content: center;
+    }
+    .nav-link {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--muted);
+      padding: 6px 12px;
+      border-radius: 6px;
+      transition: color 0.18s, background 0.18s;
+      white-space: nowrap;
+    }
+    .nav-link:hover { color: var(--navy); background: var(--navy-faint); }
+    .nav-link:focus-visible { outline: 2px solid var(--navy); outline-offset: 2px; }
+
+    /* Conditions dropdown */
+    .nav-dropdown-wrap { position: relative; }
+    .nav-dropdown-trigger {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .nav-dropdown-trigger svg { transition: transform 0.2s ease; }
+    .nav-dropdown-wrap:hover .nav-dropdown-trigger svg,
+    .nav-dropdown-wrap:focus-within .nav-dropdown-trigger svg { transform: rotate(180deg); }
+    .nav-dropdown {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%) translateY(-4px);
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      box-shadow: 0 8px 28px rgba(27,58,112,0.1), 0 2px 8px rgba(0,0,0,0.06);
+      min-width: 220px;
+      padding: 6px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.16s ease, visibility 0.16s ease, transform 0.16s ease;
+    }
+    .nav-dropdown-wrap:hover .nav-dropdown,
+    .nav-dropdown-wrap:focus-within .nav-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+    .nav-dropdown a {
+      display: block;
+      padding: 9px 14px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--muted);
+      border-radius: 7px;
+      transition: background 0.15s, color 0.15s;
+    }
+    .nav-dropdown a:hover { background: var(--navy-faint); color: var(--navy); }
+
+    /* Nav actions */
+    .nav-actions { display: flex; align-items: center; gap: 12px; flex-shrink: 0; margin-left: auto; }
+
+    /* Hamburger (mobile only) */
+    .hamburger {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      background: transparent;
+      color: var(--navy);
+      cursor: pointer;
+      transition: background 0.18s, border-color 0.18s;
+    }
+    .hamburger:hover { background: var(--navy-faint); border-color: #C4D4ED; }
+    .hamburger:focus-visible { outline: 2px solid var(--navy); outline-offset: 2px; }
+
+    /* ════════════════════════════════
+       MOBILE NAV DRAWER
+    ════════════════════════════════ */
+    .mobile-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(18,28,56,0.48);
+      z-index: 400;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    .mobile-backdrop.open { opacity: 1; visibility: visible; }
+
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: min(320px, 90vw);
+      height: 100%;
+      background: white;
+      z-index: 500;
+      overflow-y: auto;
+      transform: translateX(100%);
+      transition: transform 0.32s cubic-bezier(0.22,1,0.36,1);
+      box-shadow: -8px 0 48px rgba(18,28,56,0.14);
+      display: flex;
+      flex-direction: column;
+    }
+    .mobile-menu.open { transform: translateX(0); }
+
+    .mobile-menu-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border-soft);
+      flex-shrink: 0;
+    }
+    .mobile-menu-top img { height: 36px; width: auto; }
+    .mobile-close {
+      width: 36px;
+      height: 36px;
+      border: 1.5px solid var(--border);
+      border-radius: 7px;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s;
+    }
+    .mobile-close:hover { background: var(--bg); }
+
+    .mobile-nav-body {
+      padding: 16px 16px 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .mobile-nav-link {
+      display: block;
+      padding: 12px 14px;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text);
+      border-radius: 8px;
+      transition: background 0.15s;
+    }
+    .mobile-nav-link:hover { background: var(--bg); }
+
+    /* Conditions accordion in mobile nav */
+    .mobile-nav-details summary {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .mobile-nav-details summary::-webkit-details-marker { display: none; }
+    .mobile-nav-details summary:hover { background: var(--bg); }
+    .mobile-nav-details[open] summary .chevron { transform: rotate(180deg); }
+    .mobile-nav-details .chevron { transition: transform 0.2s ease; flex-shrink: 0; }
+    .mobile-nav-sub { padding: 4px 6px 8px 22px; }
+    .mobile-nav-sub a {
+      display: block;
+      padding: 9px 12px;
+      font-size: 14px;
+      color: var(--muted);
+      border-radius: 7px;
+      transition: background 0.15s, color 0.15s;
+    }
+    .mobile-nav-sub a:hover { background: var(--navy-faint); color: var(--navy); }
+
+    .mobile-nav-footer {
+      margin-top: auto;
+      padding: 20px 16px 0;
+      border-top: 1px solid var(--border-soft);
+    }
+    .mobile-contact-line {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--muted);
+      padding: 6px 0;
+    }
+    .mobile-contact-line a { color: var(--navy); font-weight: 500; }
+    .mobile-contact-line a:hover { text-decoration: underline; }
+
+    /* ════════════════════════════════
+       BUTTONS
+    ════════════════════════════════ */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+      font-size: 15px;
+      letter-spacing: 0.01em;
+      border-radius: 7px;
+      padding: 13px 26px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      text-decoration: none;
+      transition: background 0.18s ease, color 0.18s ease,
+                  transform 0.15s cubic-bezier(0.22,1,0.36,1),
+                  box-shadow 0.18s ease;
+      white-space: nowrap;
+    }
+    .btn:focus-visible { outline: 3px solid rgba(27,58,112,0.35); outline-offset: 3px; }
+
+    .btn-primary {
+      background: var(--navy);
+      color: white;
+      box-shadow: 0 4px 16px rgba(27,58,112,0.22), 0 1px 4px rgba(27,58,112,0.14);
+    }
+    .btn-primary:hover {
+      background: var(--navy-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(27,58,112,0.28), 0 2px 6px rgba(27,58,112,0.16);
+    }
+    .btn-primary:active { transform: translateY(0); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--navy);
+      border-color: var(--navy);
+    }
+    .btn-outline:hover { background: var(--navy); color: white; transform: translateY(-2px); }
+    .btn-outline:active { transform: translateY(0); }
+
+    .btn-green {
+      background: var(--green);
+      color: white;
+      box-shadow: 0 4px 18px rgba(110,181,52,0.28), 0 1px 4px rgba(110,181,52,0.18);
+    }
+    .btn-green:hover {
+      background: var(--green-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 26px rgba(110,181,52,0.32), 0 2px 8px rgba(110,181,52,0.2);
+    }
+    .btn-green:active { transform: translateY(0); }
+
+    .btn-text {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+      font-size: 16px;
+      color: var(--navy);
+      padding: 0;
+      border: none;
+      background: none;
+      cursor: pointer;
+      text-decoration: none;
+      letter-spacing: 0.01em;
+      transition: gap 0.22s cubic-bezier(0.22,1,0.36,1), color 0.18s;
+    }
+    .btn-text:hover { gap: 14px; color: var(--navy-dark); }
+
+    /* ════════════════════════════════
+       SECTION SHARED
+    ════════════════════════════════ */
+    .section-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--green-dark);
+      margin-bottom: 12px;
+    }
+    .section-heading {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(26px, 3vw, 40px);
+      font-weight: 600;
+      letter-spacing: -0.025em;
+      line-height: 1.16;
+      color: var(--text);
+    }
+    .section-sub {
+      font-size: 17px;
+      color: var(--muted);
+      line-height: 1.72;
+      margin-top: 14px;
+    }
+
+    /* ════════════════════════════════
+       HERO
+    ════════════════════════════════ */
+    .hero {
+      background: var(--bg);
+      padding: 96px 32px 104px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-deco-1 {
+      position: absolute;
+      right: -200px; top: -160px;
+      width: 680px; height: 680px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(110,181,52,0.08) 0%, transparent 68%);
+      pointer-events: none;
+    }
+    .hero-deco-2 {
+      position: absolute;
+      left: -120px; bottom: -180px;
+      width: 560px; height: 560px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(27,58,112,0.055) 0%, transparent 68%);
+      pointer-events: none;
+    }
+    .hero-swoosh {
+      position: absolute;
+      right: 0; top: 0;
+      width: 50%; height: 100%;
+      pointer-events: none;
+      opacity: 0.045;
+      z-index: 0;
+    }
+    .hero-inner { position: relative; z-index: 1; }
+
+    .hero-headline {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(34px, 4.2vw, 58px);
+      font-weight: 600;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      max-width: 880px;
+      margin-bottom: 24px;
+    }
+    .hero-headline em {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--navy-light);
+    }
+    .hero-sub {
+      font-size: clamp(16px, 1.4vw, 18px);
+      color: var(--muted);
+      line-height: 1.72;
+      max-width: 540px;
+      margin-bottom: 40px;
+    }
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    .hero-nudge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-style: italic;
+      color: var(--muted);
+    }
+
+    /* ════════════════════════════════
+       METRICS STRIP
+    ════════════════════════════════ */
+    .metrics-strip {
+      background: white;
+      border-top: 1px solid var(--border-soft);
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .metrics-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+      display: flex;
+      align-items: stretch;
+    }
+    .metric-item {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 22px 32px;
+    }
+    .metric-item + .metric-item { border-left: 1px solid var(--border-soft); }
+    .metric-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: var(--green-faint);
+      border: 1px solid rgba(110,181,52,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .metric-text {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.35;
+    }
+
+    /* ════════════════════════════════
+       CONDITIONS SECTION
+    ════════════════════════════════ */
+    #conditions {
+      background: white;
+      padding: 96px 32px 100px;
+    }
+    .conditions-header { margin-bottom: 48px; }
+    .conditions-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .cond-card {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 18px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 22px 24px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.22s cubic-bezier(0.22,1,0.36,1),
+                  box-shadow 0.22s ease,
+                  border-color 0.22s ease,
+                  background 0.22s ease;
+    }
+    .cond-card::after {
+      content: '';
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 4px;
+      background: var(--green);
+      border-radius: 4px 0 0 4px;
+      opacity: 0.65;
+      transition: opacity 0.2s ease;
+    }
+    .cond-card:hover {
+      background: white;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 28px rgba(27,58,112,0.09), 0 2px 8px rgba(0,0,0,0.05);
+      border-color: #C4D4ED;
+    }
+    .cond-card:hover::after { opacity: 1; }
+
+    .cond-icon {
+      width: 44px;
+      height: 44px;
+      flex-shrink: 0;
+    }
+    .cond-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+    .cond-text { flex: 1; min-width: 0; }
+    .cond-title {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      color: var(--text);
+      margin-bottom: 6px;
+      line-height: 1.25;
+    }
+    .cond-body {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .conditions-footer {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+    .conditions-footer-line {
+      font-size: 16px;
+      font-style: italic;
+      color: var(--muted);
+      font-family: 'Fraunces', serif;
+      font-weight: 400;
+      opacity: 0.9;
+    }
+
+    /* ════════════════════════════════
+       TREATMENT APPROACH
+    ════════════════════════════════ */
+    #what-to-expect {
+      background: var(--bg);
+      padding: 96px 32px;
+    }
+    .approach-header { margin-bottom: 56px; }
+    .approach-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+    .approach-step {
+      padding: 36px 32px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      position: relative;
+      box-shadow: 0 2px 10px rgba(27,58,112,0.05);
+    }
+    .step-num {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 52px;
+      font-weight: 600;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      color: #C8D5EA;
+      margin-bottom: 16px;
+      display: block;
+    }
+    .step-title {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.015em;
+      margin-bottom: 10px;
+    }
+    .step-body {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.72;
+    }
+
+    /* ════════════════════════════════
+       MEET GEOFF
+    ════════════════════════════════ */
+    #meet-geoff {
+      background: white;
+      padding: 96px 32px;
+    }
+    .geoff-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 72px;
+      align-items: center;
+    }
+    .geoff-photo-wrap {
+      position: relative;
+    }
+    .geoff-photo {
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      border-radius: 14px;
+      display: block;
+    }
+    /* decorative offset frame */
+    .geoff-photo-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -14px -14px auto auto;
+      width: 55%;
+      height: 55%;
+      border: 2px solid rgba(110,181,52,0.3);
+      border-radius: 14px;
+      z-index: 0;
+    }
+    .geoff-photo-wrap::after {
+      content: '';
+      position: absolute;
+      inset: auto auto -14px -14px;
+      width: 45%;
+      height: 40%;
+      background: var(--navy-faint);
+      border-radius: 10px;
+      z-index: 0;
+    }
+
+    .geoff-content { position: relative; z-index: 1; }
+    .geoff-name {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(28px, 3vw, 40px);
+      font-weight: 600;
+      letter-spacing: -0.025em;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .geoff-role {
+      font-size: 15px;
+      color: var(--green-dark);
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+    .geoff-divider {
+      width: 48px;
+      height: 3px;
+      background: var(--green);
+      border-radius: 2px;
+      margin-bottom: 28px;
+    }
+    .geoff-bio {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.78;
+    }
+    .geoff-bio p + p { margin-top: 16px; }
+    .geoff-cta { margin-top: 36px; }
+
+    /* ════════════════════════════════
+       PATIENT FEEDBACK
+    ════════════════════════════════ */
+    #reviews {
+      background: var(--bg);
+      padding: 96px 32px;
+    }
+    .reviews-header { margin-bottom: 52px; }
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .review-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 36px 32px 32px;
+      position: relative;
+      box-shadow: 0 2px 8px rgba(27,58,112,0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .review-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(27,58,112,0.09);
+    }
+    .review-quote-mark {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 64px;
+      line-height: 1;
+      color: var(--green-faint);
+      position: absolute;
+      top: 24px;
+      left: 28px;
+      font-weight: 600;
+      user-select: none;
+      border: none;
+    }
+    .review-quote-mark-inner {
+      position: relative;
+      display: block;
+      font-size: 56px;
+      line-height: 0.9;
+      color: var(--green);
+      opacity: 0.45;
+    }
+    .review-text {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 17px;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.65;
+      margin-top: 44px;
+      margin-bottom: 28px;
+    }
+    .review-attr {
+      font-size: 13px;
+      color: var(--quiet);
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      border-top: 1px solid var(--border-soft);
+      padding-top: 18px;
+    }
+
+    /* ════════════════════════════════
+       FINAL CTA
+    ════════════════════════════════ */
+    #book {
+      background: var(--navy-dark);
+      padding: 88px 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    .book-deco-a {
+      position: absolute;
+      top: -140px; right: -100px;
+      width: 560px; height: 560px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(110,181,52,0.13) 0%, transparent 68%);
+      pointer-events: none;
+    }
+    .book-deco-b {
+      position: absolute;
+      bottom: -120px; left: -100px;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(27,58,112,0.25) 0%, transparent 68%);
+      pointer-events: none;
+    }
+    .book-inner {
+      max-width: 660px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+    .book-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(110,181,52,0.85);
+      margin-bottom: 18px;
+    }
+    .book-heading {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(28px, 3.8vw, 48px);
+      font-weight: 600;
+      letter-spacing: -0.025em;
+      line-height: 1.12;
+      color: white;
+      margin-bottom: 18px;
+    }
+    .book-sub {
+      font-size: 17px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.7;
+      margin-bottom: 36px;
+    }
+    .book-reassure {
+      font-size: 13px;
+      color: rgba(255,255,255,0.38);
+      margin-top: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    /* ════════════════════════════════
+       FOOTER
+    ════════════════════════════════ */
+    footer {
+      background: #0C1D3E;
+      color: white;
+    }
+    .footer-top {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 56px 32px 48px;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 40px;
+    }
+    .footer-brand img { height: 38px; width: auto; margin-bottom: 16px; }
+    .footer-brand p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.65;
+      margin-bottom: 20px;
+    }
+    .footer-contact-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 8px;
+    }
+    .footer-contact-item a {
+      color: rgba(255,255,255,0.7);
+      transition: color 0.2s;
+    }
+    .footer-contact-item a:hover { color: white; }
+
+    .footer-col h4 {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 16px;
+    }
+    .footer-col a {
+      display: block;
+      font-size: 14px;
+      color: rgba(255,255,255,0.55);
+      padding: 4px 0;
+      transition: color 0.18s;
+    }
+    .footer-col a:hover { color: rgba(255,255,255,0.9); }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.07);
+      padding: 20px 32px;
+      max-width: 1160px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .footer-bottom p { font-size: 13px; color: rgba(255,255,255,0.28); }
+
+    /* ════════════════════════════════
+       SCROLL REVEAL
+    ════════════════════════════════ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1),
+                  transform 0.65s cubic-bezier(0.22,1,0.36,1);
+    }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+    .reveal-d1 { transition-delay: 0.08s; }
+    .reveal-d2 { transition-delay: 0.16s; }
+    .reveal-d3 { transition-delay: 0.24s; }
+    .reveal-d4 { transition-delay: 0.32s; }
+
+    /* Hero load-in */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-in { animation: fadeUp 0.72s cubic-bezier(0.22,1,0.36,1) both; }
+    .hi-d0 { animation-delay: 0s; }
+    .hi-d1 { animation-delay: 0.12s; }
+    .hi-d2 { animation-delay: 0.26s; }
+    .hi-d3 { animation-delay: 0.42s; }
+    .hi-d4 { animation-delay: 0.56s; }
+
+    /* ════════════════════════════════
+       RESPONSIVE
+    ════════════════════════════════ */
+    @media (max-width: 1060px) {
+      .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .nav-logo { display: none; }
+      .nav-actions .btn-primary { padding: 8px 12px !important; font-size: 12px !important; white-space: nowrap !important; }
+      .nav-actions a[href*="after-hours"] { padding: 7px 10px !important; font-size: 12px !important; white-space: nowrap !important; }
+      .hamburger { display: flex; }
+
+      .geoff-inner { grid-template-columns: 1fr; gap: 48px; }
+      .geoff-photo-wrap::before,
+      .geoff-photo-wrap::after { display: none; }
+      .geoff-photo { max-height: 420px; }
+
+      .approach-grid { grid-template-columns: 1fr; gap: 16px; }
+      .reviews-grid  { grid-template-columns: 1fr; gap: 16px; }
+      .conditions-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .nav-inner { padding: 0 20px; }
+      .hero { padding: 64px 20px 72px; }
+      #conditions, #what-to-expect, #meet-geoff, #reviews, #book { padding: 64px 20px; }
+      footer .footer-top { padding: 40px 20px 36px; grid-template-columns: 1fr; gap: 32px; }
+      footer .footer-bottom { padding: 18px 20px; flex-direction: column; text-align: center; }
+
+      /* Metrics: stacked, LEFT-aligned with inset */
+      .metrics-inner { flex-direction: column; }
+      .metric-item { border-left: none !important; padding: 14px 20px 14px 52px; justify-content: flex-start; }
+      .metric-item + .metric-item { border-top: none !important; }
+
+      /* Conditions icons: smaller on mobile */
+      .cond-icon { width: 36px; height: 36px; }
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  </style>
+</head>
+
+<body>
+
+<!-- ─── MOBILE BACKDROP ─── -->
+<div id="mobile-backdrop" class="mobile-backdrop" aria-hidden="true"></div>
+
+<!-- ─── MOBILE NAV DRAWER ─── -->
+<nav id="mobile-menu" class="mobile-menu" role="dialog" aria-modal="true" aria-label="Site navigation">
+  <div class="mobile-menu-top">
+    <a href="/" aria-label="ChiroActive home">
+      <img src="brand_assets/ChiroActive Logo.png" alt="ChiroActive" />
+    </a>
+    <button id="mobile-close" class="mobile-close" aria-label="Close menu">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M2 2L14 14M14 2L2 14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+
+  <div class="mobile-nav-body">
+    <a href="/" class="mobile-nav-link">Home</a>
+
+    <details class="mobile-nav-details">
+      <summary>
+        Conditions
+        <svg class="chevron" width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </summary>
+      <div class="mobile-nav-sub">
+        <a href="/lower-back-pain">Lower Back Pain</a>
+        <a href="/neck-pain">Desk-related pain</a>
+        <a href="/headaches-posture">Headaches &amp; Posture</a>
+        <a href="/stiffness-mobility">Stiffness &amp; Mobility</a>
+      </div>
+    </details>
+
+    <details class="mobile-nav-details">
+      <summary>Services<svg class="chevron" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5L7 9L11 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+      <div class="mobile-nav-sub">
+        <a href="/chiropractic-care">Chiropractic Care</a>
+        <a href="/flexion-distraction">Flexion Distraction</a>
+        <a href="/manual-adjustments">Manual Adjustments</a>
+        <a href="/foot-levelers">Foot Levelers</a>
+        <a href="/k-laser-therapy">K-Laser Therapy</a>
+        <a href="/after-hours-care">After-Hours Care</a>
+      </div>
+    </details>
+    <a href="/about"    class="mobile-nav-link">About</a>
+    <a href="/faq"      class="mobile-nav-link">FAQ</a>
+    <a href="/contact"  class="mobile-nav-link">Contact</a>
+    <a href="/useful-links" class="mobile-nav-link">Useful Links</a>
+
+    <div class="mobile-nav-footer">
+      <a href="#book" class="btn btn-primary" style="width:100%;justify-content:center;margin-bottom:16px;" id="mobile-book-btn">
+        Book an Appointment
+      </a>
+      <div class="mobile-contact-line">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 2.5C2 2.5 3 4.5 5 6.5C7 8.5 9 9.5 10.5 10L12 8.5L11 7.5C11 7.5 9.5 8.5 8.5 7.5C7.5 6.5 8 5.5 8 5.5L7 4.5L5.5 6C5 4.5 4 3 2 2.5Z" stroke="#5B6278" stroke-width="1.3" stroke-linejoin="round"/></svg>
+        <a href="tel:0883744033">(08) 8374 4033</a>
+      </div>
+      <div class="mobile-contact-line">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1.5" y="3" width="11" height="8" rx="1.5" stroke="#5B6278" stroke-width="1.3"/><path d="M1.5 5L7 8.5L12.5 5" stroke="#5B6278" stroke-width="1.3" stroke-linecap="round"/></svg>
+        <a href="mailto:enquiries@chiroactive.com.au">enquiries@chiroactive.com.au</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+<!-- ════════════════════════════════
+     SITE HEADER
+════════════════════════════════ -->
+<header id="site-nav">
+  <div class="nav-inner">
+
+    <!-- Logo -->
+    <a href="/" class="nav-logo" aria-label="ChiroActive — home">
+      <img src="brand_assets/ChiroActive Logo.png" alt="ChiroActive" />
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="/" class="nav-link">Home</a>
+
+      <div class="nav-dropdown-wrap">
+        <button class="nav-link nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
+          Conditions
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+            <path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div class="nav-dropdown" role="menu">
+          <a href="/lower-back-pain" role="menuitem">Lower Back Pain</a>
+          <a href="/neck-pain"       role="menuitem">Desk-related pain</a>
+          <a href="/headaches-posture" role="menuitem">Headaches &amp; Posture</a>
+          <a href="/stiffness-mobility" role="menuitem">Stiffness &amp; Mobility</a>
+        </div>
+      </div>
+
+      <div class="nav-dropdown-wrap">
+        <button class="nav-link nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">Services<svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="nav-dropdown" role="menu">
+          <a href="/chiropractic-care" role="menuitem">Chiropractic Care</a>
+          <a href="/flexion-distraction" role="menuitem">Flexion Distraction</a>
+          <a href="/manual-adjustments" role="menuitem">Manual Adjustments</a>
+          <a href="/foot-levelers" role="menuitem">Foot Levelers</a>
+          <a href="/k-laser-therapy" role="menuitem">K-Laser Therapy</a>
+          <a href="/after-hours-care" role="menuitem">After-Hours Care</a>
+        </div>
+      </div>
+      <a href="/about"    class="nav-link">About</a>
+      <a href="/faq"      class="nav-link">FAQ</a>
+      <a href="/contact"  class="nav-link">Contact</a>
+      <a href="/useful-links" class="nav-link">Useful Links</a>
+    </nav>
+
+    <!-- Actions -->
+    <div class="nav-actions">
+      <a href="#book" class="btn btn-primary" style="padding:10px 20px;font-size:14px;">Book Appointment</a>
+      <a href="/after-hours-care" style="display:inline-flex;align-items:center;font-family:'Outfit',sans-serif;font-weight:600;font-size:13px;color:var(--navy);border:1.5px solid rgba(27,58,112,0.25);border-radius:7px;padding:8px 14px;transition:border-color .18s,background .18s;" onmouseover="this.style.background='var(--navy-faint)'" onmouseout="this.style.background=''">After Hours</a>
+      <button id="hamburger" class="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-menu">
+        <svg width="20" height="14" viewBox="0 0 20 14" fill="none" aria-hidden="true">
+          <path d="M0 1H20M0 7H20M0 13H20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+
+  </div>
+</header>
+
+
+<!-- ════════════════════════════════
+     HERO
+════════════════════════════════ -->
+<section class="hero" id="home">
+  <div class="hero-deco-1"></div>
+  <div class="hero-deco-2"></div>
+  <svg class="hero-swoosh" viewBox="0 0 600 700" fill="none" preserveAspectRatio="xMaxYMid meet" aria-hidden="true">
+    <path d="M600 0 Q200 180 400 350 Q600 520 100 700 L600 700 Z" fill="#1B3A70"/>
+  </svg>
+
+  <div class="hero-inner container">
+
+    <h1 class="hero-headline hero-in hi-d0">
+      Fix back, neck or posture pain<br>
+      <em>with experienced, personalised care.</em>
+    </h1>
+
+    <p class="hero-sub hero-in hi-d1">
+      Serving Adelaide since 1994. Get clear answers, a proper assessment,
+      and a personalised treatment plan.
+    </p>
+
+    <div class="hero-ctas hero-in hi-d2">
+      <a href="#book"           class="btn btn-primary">Book Your First Appointment</a>
+      <a href="#what-to-expect" class="btn btn-outline">See what to expect</a>
+    </div>
+
+    <p class="hero-nudge hero-in hi-d3">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <circle cx="8" cy="8" r="7.25" stroke="#6EB534" stroke-opacity="0.6"/>
+        <path d="M5 8.5L7 10.5L11 6" stroke="#6EB534" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      No rushed appointments. No guesswork. Just clear answers.
+    </p>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════
+     METRICS STRIP
+════════════════════════════════ -->
+<div class="metrics-strip">
+  <div class="metrics-inner">
+
+    <div class="metric-item">
+      <div class="metric-icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <circle cx="9" cy="9" r="7" stroke="#4F8A20" stroke-width="1.4"/>
+          <path d="M9 5V9L11.5 11" stroke="#4F8A20" stroke-width="1.4" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <span class="metric-text">30+ years experience</span>
+    </div>
+
+    <div class="metric-item">
+      <div class="metric-icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <path d="M2.5 8.5L9 2.5L15.5 8.5V16H11.5V12H6.5V16H2.5V8.5Z" stroke="#4F8A20" stroke-width="1.4" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <span class="metric-text">Family-run local clinic</span>
+    </div>
+
+    <div class="metric-item">
+      <div class="metric-icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <rect x="2" y="3.5" width="14" height="12" rx="2" stroke="#4F8A20" stroke-width="1.4"/>
+          <path d="M2 7.5H16" stroke="#4F8A20" stroke-width="1" stroke-opacity="0.4"/>
+          <path d="M6 1.5V4M12 1.5V4" stroke="#4F8A20" stroke-width="1.4" stroke-linecap="round"/>
+          <path d="M6.5 11H8.5V13" stroke="#4F8A20" stroke-width="1.3" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <span class="metric-text">Longer, personalised appointments</span>
+    </div>
+
+    <div class="metric-item">
+      <div class="metric-icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <rect x="1.5" y="5" width="15" height="10" rx="2" stroke="#4F8A20" stroke-width="1.4"/>
+          <path d="M1.5 9H16.5" stroke="#4F8A20" stroke-width="1.3"/>
+          <rect x="3.5" y="11.5" width="4" height="1.5" rx="0.5" fill="#4F8A20" opacity="0.5"/>
+          <path d="M5.5 3L4.5 5M9 2.5V5M12.5 3L13.5 5" stroke="#4F8A20" stroke-width="1.2" stroke-linecap="round" opacity="0.5"/>
+        </svg>
+      </div>
+      <span class="metric-text">Private health rebates available</span>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════
+     CONDITIONS
+════════════════════════════════ -->
+<section id="conditions">
+  <div class="container">
+
+    <div class="conditions-header reveal">
+      <p class="section-label">Common conditions</p>
+      <h2 class="section-heading" style="max-width:620px;">
+        Still dealing with pain or stiffness that won't go away?
+      </h2>
+      <p class="section-sub" style="max-width:520px;">
+        These are some of the most common problems we help with — and often the ones people have
+        been putting up with far too long.
+      </p>
+    </div>
+
+    <div class="conditions-grid">
+
+      <!-- Card 1 — Lower back / sciatica -->
+      <a href="/lower-back-pain" class="cond-card reveal reveal-d1">
+        <div class="cond-icon">
+          <img src="brand_assets/Lower Back pain or sciatica Icon.png" alt="" />
+        </div>
+        <div class="cond-text">
+          <h3 class="cond-title">Lower back pain or sciatica</h3>
+          <p class="cond-body">Ongoing lower back pain, sciatica or stiffness that won't go away can affect how you move, work and live day to day.</p>
+        </div>
+      </a>
+
+      <!-- Card 2 — Desk pain / posture -->
+      <a href="/neck-pain" class="cond-card reveal reveal-d2">
+        <div class="cond-icon">
+          <img src="brand_assets/Desk related pain icon.png" alt="" />
+        </div>
+        <div class="cond-text">
+          <h3 class="cond-title">Desk-related pain</h3>
+          <p class="cond-body">Long hours at a desk can lead to tightness, discomfort and poor posture that builds up over time.</p>
+        </div>
+      </a>
+
+      <!-- Card 3 — Headaches & posture -->
+      <a href="/headaches-posture" class="cond-card reveal reveal-d3">
+        <div class="cond-icon">
+          <img src="brand_assets/Headaches & Posture Icon.png" alt="" />
+        </div>
+        <div class="cond-text">
+          <h3 class="cond-title">Headaches &amp; posture</h3>
+          <p class="cond-body">Tension headaches are often connected to neck and posture issues rather than something more serious.</p>
+        </div>
+      </a>
+
+      <!-- Card 4 — Stiffness & mobility -->
+      <a href="/stiffness-mobility" class="cond-card reveal reveal-d4">
+        <div class="cond-icon">
+          <img src="brand_assets/Stiffness and mobility icon.png" alt="" />
+        </div>
+        <div class="cond-text">
+          <h3 class="cond-title">Stiffness &amp; mobility</h3>
+          <p class="cond-body">If your movement feels restricted or tight, it can gradually worsen without the right treatment.</p>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- Footer line + CTA -->
+    <div class="conditions-footer reveal">
+      <p class="conditions-footer-line">
+        These issues rarely fix themselves — and often get worse over time.
+      </p>
+      <a href="/services" class="btn-text">
+        Find the right treatment
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M3 8H13M9.5 4.5L13 8L9.5 11.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════
+     TREATMENT APPROACH
+════════════════════════════════ -->
+<section id="what-to-expect">
+  <div class="container">
+
+    <div class="approach-header reveal">
+      <p class="section-label">How we work</p>
+      <h2 class="section-heading" style="max-width:460px;">
+        Straightforward care,<br>properly done
+      </h2>
+      <p class="section-sub" style="max-width:500px;">
+        Every patient gets the same level of care — thorough, clear, and specific to them.
+      </p>
+    </div>
+
+    <div class="approach-grid">
+
+      <div class="approach-step reveal reveal-d1">
+        <span class="step-num">01</span>
+        <h3 class="step-title">A thorough assessment</h3>
+        <p class="step-body">
+          We take time to understand your history, lifestyle, and how the problem is
+          affecting your day-to-day life — not just the symptom in front of us.
+        </p>
+      </div>
+
+      <div class="approach-step reveal reveal-d2">
+        <span class="step-num">02</span>
+        <h3 class="step-title">A clear explanation</h3>
+        <p class="step-body">
+          Before any treatment begins, you'll know exactly what we found and why it matters.
+          Plain language, no jargon, no pressure.
+        </p>
+      </div>
+
+      <div class="approach-step reveal reveal-d3">
+        <span class="step-num">03</span>
+        <h3 class="step-title">A tailored treatment plan</h3>
+        <p class="step-body">
+          Treatment is matched to you — using the right techniques, at a pace that
+          feels comfortable, for your specific situation.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════
+     MEET GEOFF
+════════════════════════════════ -->
+<section id="meet-geoff">
+  <div class="geoff-inner">
+
+    <div class="geoff-photo-wrap reveal">
+      <img
+        src="brand_assets/Geoff Portrait.png"
+        alt="Geoff McCann — Principal Chiropractor at ChiroActive"
+        class="geoff-photo"
+        style="position:relative;z-index:1;"
+      />
+    </div>
+
+    <div class="geoff-content reveal reveal-d1">
+      <p class="section-label">Your chiropractor</p>
+      <h2 class="geoff-name">Meet Geoff</h2>
+      <p class="geoff-role">Principal Chiropractor &amp; Clinic Founder</p>
+      <div class="geoff-divider"></div>
+
+      <div class="geoff-bio">
+        <p>
+          Geoff graduated from the Sydney College of Chiropractic in 1990 and has been
+          caring for patients in Adelaide ever since — building a reputation for thoroughness,
+          warmth, and genuine interest in the people he treats.
+        </p>
+        <p>
+          His approach has never changed: take time to listen, assess properly, and explain
+          clearly. You'll leave knowing exactly what was found, what it means, and what
+          happens next. No jargon, no pressure.
+        </p>
+        <p>
+          Outside the clinic, Geoff is a father of two grown daughters who enjoys walking,
+          running and climbing Mount Lofty, and making music. He brings the same unhurried,
+          thoughtful approach to life that he brings to his work — and patients notice.
+        </p>
+      </div>
+
+      <div class="geoff-cta">
+        <a href="#book" class="btn btn-primary">Book an Appointment</a>
+        <a href="/about" class="btn btn-outline" style="margin-left:12px;">Learn More</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════
+     PATIENT FEEDBACK
+════════════════════════════════ -->
+<section id="reviews">
+  <div class="container">
+
+    <div class="reviews-header reveal">
+      <p class="section-label">Patient feedback</p>
+      <h2 class="section-heading">What patients say</h2>
+    </div>
+
+    <div class="reviews-grid">
+
+      <div class="review-card reveal reveal-d1">
+        <span class="review-quote-mark" aria-hidden="true">
+          <span class="review-quote-mark-inner">"</span>
+        </span>
+        <p class="review-text">
+          Geoff took the time to get to know us as people rather than just numbers.
+        </p>
+        <p class="review-attr">Google review</p>
+      </div>
+
+      <div class="review-card reveal reveal-d2">
+        <span class="review-quote-mark" aria-hidden="true">
+          <span class="review-quote-mark-inner">"</span>
+        </span>
+        <p class="review-text">
+          He managed to work on my issues much easier and less aggressively.
+        </p>
+        <p class="review-attr">Google review</p>
+      </div>
+
+      <div class="review-card reveal reveal-d3">
+        <span class="review-quote-mark" aria-hidden="true">
+          <span class="review-quote-mark-inner">"</span>
+        </span>
+        <p class="review-text">
+          Very thorough, knows what he's doing, and has a broad sense of humour.
+        </p>
+        <p class="review-attr">Google review</p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════
+     FINAL CTA
+════════════════════════════════ -->
+<section id="book">
+  <div class="book-deco-a"></div>
+  <div class="book-deco-b"></div>
+
+  <div class="book-inner reveal">
+    <p class="book-label">Take the first step</p>
+    <h2 class="book-heading">Ready to feel better?</h2>
+    <p class="book-sub">
+      Book a first appointment and you'll get a proper assessment and a clear plan —
+      no pressure, no guesswork.
+    </p>
+    <a href="tel:0883744033" class="btn btn-green" style="font-size:16px;padding:15px 32px;">
+      Book Your First Appointment
+    </a>
+    <p class="book-reassure">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+        <circle cx="7" cy="7" r="6.25" stroke="rgba(255,255,255,0.35)"/>
+        <path d="M4.5 7.5L6 9L9.5 5.5" stroke="rgba(255,255,255,0.55)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Adelaide Suburbs &nbsp;·&nbsp; (08) 8374 4033 &nbsp;·&nbsp; enquiries@chiroactive.com.au
+    </p>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════
+     FOOTER
+════════════════════════════════ -->
+<footer>
+  <div class="footer-top">
+
+    <div class="footer-brand">
+      <img src="brand_assets/ChiroActive Logo Transparent.png" alt="ChiroActive"
+           style="height:38px;width:auto;opacity:0.85;" />
+      <p>Experienced chiropractic care in Adelaide's suburbs. Serving the community since 1994.</p>
+      <div class="footer-contact-item">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 2.5C2 2.5 3 4.5 5 6.5C7 8.5 9 9.5 10.5 10L12 8.5L11 7.5C11 7.5 9.5 8.5 8.5 7.5C7.5 6.5 8 5.5 8 5.5L7 4.5L5.5 6C5 4.5 4 3 2 2.5Z" stroke="rgba(255,255,255,0.4)" stroke-width="1.3" stroke-linejoin="round"/></svg>
+        <a href="tel:0883744033">(08) 8374 4033</a>
+      </div>
+      <div class="footer-contact-item">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><rect x="1.5" y="3" width="11" height="8" rx="1.5" stroke="rgba(255,255,255,0.4)" stroke-width="1.3"/><path d="M1.5 5L7 8.5L12.5 5" stroke="rgba(255,255,255,0.4)" stroke-width="1.3" stroke-linecap="round"/></svg>
+        <a href="mailto:enquiries@chiroactive.com.au">enquiries@chiroactive.com.au</a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4>Conditions</h4>
+      <a href="/lower-back-pain">Lower Back Pain</a>
+      <a href="/neck-pain">Desk-related pain</a>
+      <a href="/headaches-posture">Headaches &amp; Posture</a>
+      <a href="/stiffness-mobility">Stiffness &amp; Mobility</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Services</h4>
+      <a href="/chiropractic-care">Chiropractic Care</a>
+      <a href="/flexion-distraction">Flexion Distraction</a>
+      <a href="/manual-adjustments">Manual Adjustments</a>
+      <a href="/foot-levelers">Foot Levelers</a>
+      <a href="/k-laser-therapy">K-Laser Therapy</a>
+      <a href="/after-hours-care">After-Hours Care</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Clinic</h4>
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="/faq">FAQ</a>
+      <a href="/contact">Contact</a>
+      <a href="/useful-links">Useful Links</a>
+      <a href="/privacy-policy">Privacy Policy</a>
+    </div>
+
+  </div>
+  <div class="footer-bottom" style="max-width:1160px;margin:0 auto;padding:20px 32px;">
+    <p>© 2026 ChiroActive. All rights reserved. · Adelaide, SA</p>
+    <p>ABN · AHPRA registered practitioner</p>
+  </div>
+</footer>
+
+
+<!-- ════════════════════════════════
+     SCRIPTS
+════════════════════════════════ -->
+<script>
+  // ── Mobile nav ──
+  const hamburger   = document.getElementById('hamburger');
+  const mobileMenu  = document.getElementById('mobile-menu');
+  const backdrop    = document.getElementById('mobile-backdrop');
+  const closeBtn    = document.getElementById('mobile-close');
+  const mobileBook  = document.getElementById('mobile-book-btn');
+
+  function openNav() {
+    mobileMenu.classList.add('open');
+    backdrop.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    hamburger.setAttribute('aria-expanded', 'true');
+  }
+  function closeNav() {
+    mobileMenu.classList.remove('open');
+    backdrop.classList.remove('open');
+    document.body.style.overflow = '';
+    hamburger.setAttribute('aria-expanded', 'false');
+  }
+
+  hamburger.addEventListener('click', openNav);
+  closeBtn.addEventListener('click', closeNav);
+  backdrop.addEventListener('click', closeNav);
+  if (mobileBook) mobileBook.addEventListener('click', closeNav);
+
+  // Close on Escape
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && mobileMenu.classList.contains('open')) closeNav();
+  });
+
+  // ── Scroll reveal ──
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.07, rootMargin: '0px 0px -28px 0px' });
+  revealEls.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
