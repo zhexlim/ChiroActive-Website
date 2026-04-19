@@ -1,4 +1,22 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/about",               "destination": "/about.html" },
+    { "source": "/services",            "destination": "/services.html" },
+    { "source": "/faq",                 "destination": "/faq.html" },
+    { "source": "/contact",             "destination": "/contact.html" },
+    { "source": "/useful-links",        "destination": "/useful-links.html" },
+    { "source": "/privacy-policy",      "destination": "/privacy-policy.html" },
+    { "source": "/after-hours-care",    "destination": "/after-hours-care.html" },
+    { "source": "/chiropractic-care",   "destination": "/chiropractic-care.html" },
+    { "source": "/flexion-distraction", "destination": "/flexion-distraction.html" },
+    { "source": "/manual-adjustments",  "destination": "/manual-adjustments.html" },
+    { "source": "/foot-levelers",       "destination": "/foot-levelers.html" },
+    { "source": "/k-laser-therapy",     "destination": "/k-laser-therapy.html" },
+    { "source": "/lower-back-pain",     "destination": "/lower-back-pain.html" },
+    { "source": "/neck-pain",           "destination": "/neck-pain.html" },
+    { "source": "/headaches-posture",   "destination": "/headaches-posture.html" },
+    { "source": "/stiffness-mobility",  "destination": "/stiffness-mobility.html" }
+  ]
 }
