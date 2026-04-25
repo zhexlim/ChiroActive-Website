@@ -46,6 +46,13 @@
 - **Spacing:** Use intentional, consistent spacing tokens — not random Tailwind steps.
 - **Depth:** Surfaces should have a layering system (base → elevated → floating), not all sit at the same z-plane.
 
+## Git / Deployment Rules
+- Always work locally by default.
+- All edits, testing, screenshots, and validation must happen on localhost unless the user explicitly says otherwise.
+- Never commit, push, sync, deploy, publish, or create a pull request unless the user explicitly instructs you to do so.
+- Do not suggest pushing to GitHub or deploying to Vercel unless asked.
+- Treat GitHub/Vercel as finalization only, not part of iteration.
+
 ## Hard Rules
 - Do not add sections, features, or content not in the reference
 - Do not "improve" a reference design — match it
