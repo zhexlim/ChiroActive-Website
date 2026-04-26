@@ -165,19 +165,28 @@
     <div style="margin-top:20px;background:white;border:1px solid var(--border);border-radius:10px;padding:20px 20px 22px;">
       <p style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:3px;">Have a question first?</p>
       <p style="font-size:13px;color:var(--muted);margin-bottom:14px;line-height:1.5;">Leave your details and we'll call you back.</p>
-      <form action="mailto:enquiries@chiroactive.com.au" method="POST" enctype="text/plain">
-        <input type="text" name="name" placeholder="Name" style="width:100%;padding:9px 11px;border:1.5px solid var(--border);border-radius:7px;font-family:'Outfit',sans-serif;font-size:13px;color:var(--text);background:var(--bg);box-sizing:border-box;margin-bottom:7px;outline:none;display:block;" onfocus="this.style.borderColor='var(--navy)'" onblur="this.style.borderColor='var(--border)'"/>
+      <form id="sq-form-hp" novalidate>
 
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:7px;">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:4px;">
 
-          <input type="tel" name="phone" placeholder="Phone" style="width:100%;padding:9px 11px;border:1.5px solid var(--border);border-radius:7px;font-family:'Outfit',sans-serif;font-size:13px;color:var(--text);background:var(--bg);box-sizing:border-box;outline:none;display:block;" onfocus="this.style.borderColor='var(--navy)'" onblur="this.style.borderColor='var(--border)'"/>
+              <input type="text" name="first_name" id="sq-fn-hp" placeholder="First Name" style="width:100%;padding:9px 11px;border:1.5px solid var(--border);border-radius:7px;font-family:'Outfit',sans-serif;font-size:13px;color:var(--text);background:var(--bg);box-sizing:border-box;outline:none;display:block;"/>
 
-          <input type="email" name="email" placeholder="Email" style="width:100%;padding:9px 11px;border:1.5px solid var(--border);border-radius:7px;font-family:'Outfit',sans-serif;font-size:13px;color:var(--text);background:var(--bg);box-sizing:border-box;outline:none;display:block;" onfocus="this.style.borderColor='var(--navy)'" onblur="this.style.borderColor='var(--border)'"/>
+              <input type="text" name="last_name" id="sq-ln-hp" placeholder="Last Name" style="width:100%;padding:9px 11px;border:1.5px solid var(--border);border-radius:7px;font-family:'Outfit',sans-serif;font-size:13px;color:var(--text);background:var(--bg);box-sizing:border-box;outline:none;display:block;"/>
 
-        </div>
-        <textarea name="message" placeholder="What's going on?" rows="3" style="width:100%;padding:9px 11px;border:1.5px solid var(--border);border-radius:7px;font-family:'Outfit',sans-serif;font-size:13px;color:var(--text);background:var(--bg);resize:vertical;box-sizing:border-box;margin-bottom:10px;outline:none;display:block;" onfocus="this.style.borderColor='var(--navy)'" onblur="this.style.borderColor='var(--border)'"></textarea>
-        <button type="submit" style="width:100%;padding:10px;background:var(--navy);color:white;font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;border:none;border-radius:7px;cursor:pointer;" onmouseover="this.style.background='var(--navy-dark)'" onmouseout="this.style.background='var(--navy)'">Send Message</button>
-      </form>
+            </div>
+            <span id="sq-err-hp-names" style="font-size:11px;color:#B91C1C;display:block;margin-bottom:4px;"></span>
+
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:4px;">
+
+              <input type="tel" name="phone" id="sq-ph-hp" placeholder="04xxxxxxxx" maxlength="10" style="width:100%;padding:9px 11px;border:1.5px solid var(--border);border-radius:7px;font-family:'Outfit',sans-serif;font-size:13px;color:var(--text);background:var(--bg);box-sizing:border-box;outline:none;display:block;"/>
+
+              <input type="email" name="email" id="sq-em-hp" placeholder="Email" style="width:100%;padding:9px 11px;border:1.5px solid var(--border);border-radius:7px;font-family:'Outfit',sans-serif;font-size:13px;color:var(--text);background:var(--bg);box-sizing:border-box;outline:none;display:block;"/>
+
+            </div>
+            <span id="sq-err-hp-contact" style="font-size:11px;color:#B91C1C;display:block;margin-bottom:4px;"></span>
+            <textarea name="message" placeholder="What's going on?" rows="3" style="width:100%;padding:9px 11px;border:1.5px solid var(--border);border-radius:7px;font-family:'Outfit',sans-serif;font-size:13px;color:var(--text);background:var(--bg);box-sizing:border-box;outline:none;resize:vertical;margin-bottom:10px;display:block;"></textarea>
+            <button type="submit" id="sq-btn-hp" style="width:100%;padding:10px;background:var(--navy);color:white;font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;border:none;border-radius:7px;cursor:pointer;transition:background .18s,transform .15s;" onmouseover="this.style.background='var(--navy-dark)'" onmouseout="this.style.background='var(--navy)'">Send Message</button>
+          </form>
     </div>
   </div>
 </div></div></section>
@@ -187,7 +196,7 @@
       <img src="brand_assets/ChiroActive Logo Transparent.png" alt="ChiroActive" style="height:38px;width:auto;opacity:0.85;" />
       <p>Experienced chiropractic care in Adelaide's suburbs. Serving the community since 1994.</p>
       <div class="footer-contact-item">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 2.5C2 2.5 3 4.5 5 6.5C7 8.5 9 9.5 10.5 10L12 8.5L11 7.5C11 7.5 9.5 8.5 8.5 7.5C7.5 6.5 8 5.5 8 5.5L7 4.5L5.5 6C5 4.5 4 3 2 2.5Z" stroke="rgba(255,255,255,0.4)" stroke-width="1.3" stroke-linejoin="round"/></svg>
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M12.83 9.87v1.75a1.17 1.17 0 0 1-1.27 1.17 11.54 11.54 0 0 1-5.03-1.79A11.37 11.37 0 0 1 2.73 7.58a11.54 11.54 0 0 1-1.79-5.06A1.17 1.17 0 0 1 2.11 1.17h1.75a1.17 1.17 0 0 1 1.17 1 7.49 7.49 0 0 0 .41 1.64 1.17 1.17 0 0 1-.26 1.23L4.72 5.78a9.33 9.33 0 0 0 3.5 3.5l.74-.74a1.17 1.17 0 0 1 1.23-.26 7.49 7.49 0 0 0 1.64.41A1.17 1.17 0 0 1 12.83 9.87zM8.78 2.92a2.92 2.92 0 0 1 2.33 4.32M11.14 1.46a4.96 4.96 0 0 1 1.69 3.79 4.96 4.96 0 0 1-1.69 3.79" stroke="rgba(255,255,255,0.4)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
         <a href="tel:0883744033">(08) 8374 4033</a>
       </div>
       <div class="footer-contact-item">
@@ -224,12 +233,122 @@
     <p>ABN &middot; AHPRA registered practitioner</p>
   </div>
 </footer>
+<!-- Sidebar enquiry popup -->
+<div id="sq-popup" style="display:none;position:fixed;inset:0;z-index:1000;align-items:center;justify-content:center;padding:20px;">
+  <div id="sq-backdrop" style="position:absolute;inset:0;background:rgba(12,29,62,0.55);backdrop-filter:blur(4px);"></div>
+  <div style="position:relative;background:white;border-radius:14px;padding:36px 32px;max-width:400px;width:100%;box-shadow:0 24px 60px rgba(12,29,62,0.2),0 4px 16px rgba(0,0,0,0.1);text-align:center;">
+    <div id="sq-popup-icon" style="width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;"></div>
+    <p id="sq-popup-msg" style="font-family:'Outfit',sans-serif;font-size:16px;line-height:1.6;color:#191D2C;font-weight:500;"></p>
+    <button id="sq-popup-close" style="margin-top:24px;padding:11px 32px;background:#1B3A70;color:white;font-family:'Outfit',sans-serif;font-size:14px;font-weight:600;border:none;border-radius:7px;cursor:pointer;" onmouseover="this.style.background='#122856'" onmouseout="this.style.background='#1B3A70'">OK</button>
+  </div>
+</div>
 <script>
   const h=document.getElementById('hamburger'),m=document.getElementById('mobile-menu'),b=document.getElementById('mobile-backdrop'),c=document.getElementById('mobile-close');
   function openN(){m.classList.add('open');b.classList.add('open');document.body.style.overflow='hidden';}
   function closeN(){m.classList.remove('open');b.classList.remove('open');document.body.style.overflow='';}
   h.addEventListener('click',openN);c.addEventListener('click',closeN);b.addEventListener('click',closeN);
-  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeN();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'){if(document.getElementById('sq-popup').style.display==='flex')closeSqPopup();else closeN();}});
+
+  const sqPopup=document.getElementById('sq-popup');
+  const sqMsg=document.getElementById('sq-popup-msg');
+  const sqIcon=document.getElementById('sq-popup-icon');
+  document.getElementById('sq-popup-close').addEventListener('click',closeSqPopup);
+  document.getElementById('sq-backdrop').addEventListener('click',closeSqPopup);
+  function closeSqPopup(){sqPopup.style.display='none';document.body.style.overflow='';}
+  function showSqPopup(ok){
+    if(ok){
+      sqIcon.style.cssText='width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;background:#EDF7E3;border:1px solid rgba(110,181,52,.3);';
+      sqIcon.innerHTML='<svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="10" stroke="#6EB534" stroke-width="1.6"/><path d="M6.5 11.5L9.5 14.5L15.5 8.5" stroke="#6EB534" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      sqMsg.textContent="Thanks your enquiry has been sent. We'll get back to you shortly.";
+    }else{
+      sqIcon.style.cssText='width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;background:#FEF2F2;border:1px solid rgba(220,38,38,.2);';
+      sqIcon.innerHTML='<svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="10" stroke="#B91C1C" stroke-width="1.6"/><path d="M11 7V11M11 15h.01" stroke="#B91C1C" stroke-width="1.8" stroke-linecap="round"/></svg>';
+      sqMsg.innerHTML='Something went wrong. Please call us directly on <a href="tel:0883744033" style="color:#1B3A70;font-weight:600;">(08) 8374 4033</a>.';
+    }
+    sqPopup.style.display='flex';document.body.style.overflow='hidden';
+  }
+
+  function sqBorder(el,color){el.style.borderColor=color;}
+  function sqValidateName(val){
+    if(!val.trim())return'This field is required';
+    if(/\d/.test(val))return'Name cannot contain numbers';
+    return'';
+  }
+  function sqValidateEmail(val){
+    if(!val.trim())return'Email is required';
+    if(/\s/.test(val))return'Email cannot contain spaces';
+    if(!val.includes('@')||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val))return'Enter a valid email';
+    return'';
+  }
+  function sqValidatePhone(val){
+    if(!val)return'';
+    if(/\s/.test(val))return'No spaces allowed';
+    if(!/^\d+$/.test(val))return'Digits only';
+    if(val.length!==10)return'Must be exactly 10 digits';
+    return'';
+  }
+  function sqShowRowErr(id,msg){document.getElementById(id).textContent=msg;}
+
+  const fnEl=document.getElementById('sq-fn-hp');
+  const lnEl=document.getElementById('sq-ln-hp');
+  const phEl=document.getElementById('sq-ph-hp');
+  const emEl=document.getElementById('sq-em-hp');
+
+  [fnEl,lnEl].forEach(function(el){
+    el.addEventListener('focus',function(){sqBorder(this,'#1B3A70');});
+    el.addEventListener('blur',function(){
+      var e=sqValidateName(this.value);
+      sqBorder(this,e?'#EF4444':'#E2DDD3');
+      sqShowRowErr('sq-err-hp-names',sqValidateName(fnEl.value)||sqValidateName(lnEl.value));
+    });
+    el.addEventListener('input',function(){
+      if(this.style.borderColor==='rgb(239, 68, 68)'){sqBorder(this,sqValidateName(this.value)?'#EF4444':'#1B3A70');}
+      sqShowRowErr('sq-err-hp-names',sqValidateName(fnEl.value)||sqValidateName(lnEl.value));
+    });
+  });
+
+  phEl.addEventListener('focus',function(){sqBorder(this,'#1B3A70');});
+  phEl.addEventListener('blur',function(){
+    var e=sqValidatePhone(this.value);
+    sqBorder(this,e?'#EF4444':'#E2DDD3');
+    sqShowRowErr('sq-err-hp-contact',e||sqValidateEmail(emEl.value));
+  });
+  phEl.addEventListener('input',function(){
+    if(this.style.borderColor==='rgb(239, 68, 68)'){sqBorder(this,sqValidatePhone(this.value)?'#EF4444':'#1B3A70');}
+    sqShowRowErr('sq-err-hp-contact',sqValidatePhone(phEl.value)||sqValidateEmail(emEl.value));
+  });
+
+  emEl.addEventListener('focus',function(){sqBorder(this,'#1B3A70');});
+  emEl.addEventListener('blur',function(){
+    var e=sqValidateEmail(this.value);
+    sqBorder(this,e?'#EF4444':'#E2DDD3');
+    sqShowRowErr('sq-err-hp-contact',sqValidatePhone(phEl.value)||e);
+  });
+  emEl.addEventListener('input',function(){
+    if(this.style.borderColor==='rgb(239, 68, 68)'){sqBorder(this,sqValidateEmail(this.value)?'#EF4444':'#1B3A70');}
+    sqShowRowErr('sq-err-hp-contact',sqValidatePhone(phEl.value)||sqValidateEmail(emEl.value));
+  });
+
+  document.getElementById('sq-form-hp').addEventListener('submit',async function(e){
+    e.preventDefault();
+    var errN=sqValidateName(fnEl.value)||sqValidateName(lnEl.value);
+    var errC=sqValidatePhone(phEl.value)||sqValidateEmail(emEl.value);
+    sqShowRowErr('sq-err-hp-names',errN);
+    sqShowRowErr('sq-err-hp-contact',errC);
+    if(sqValidateName(fnEl.value))sqBorder(fnEl,'#EF4444');
+    if(sqValidateName(lnEl.value))sqBorder(lnEl,'#EF4444');
+    if(sqValidatePhone(phEl.value))sqBorder(phEl,'#EF4444');
+    if(sqValidateEmail(emEl.value))sqBorder(emEl,'#EF4444');
+    if(errN||errC)return;
+    var btn=document.getElementById('sq-btn-hp');
+    btn.disabled=true;btn.textContent='Sending…';
+    try{
+      var res=await fetch('https://formspree.io/f/mqewjyov',{method:'POST',body:new FormData(this),headers:{'Accept':'application/json'}});
+      if(res.ok){showSqPopup(true);this.reset();[fnEl,lnEl,phEl,emEl].forEach(function(el){sqBorder(el,'#E2DDD3');});}
+      else showSqPopup(false);
+    }catch(err){showSqPopup(false);}
+    finally{btn.disabled=false;btn.textContent='Send Message';}
+  });
 </script>
 </body>
 </html>

@@ -67,6 +67,9 @@
     .form-group input:focus,.form-group textarea:focus{outline:none;border-color:var(--navy);}
     .form-group textarea{resize:vertical;min-height:100px;}
     .form-note{font-size:13px;color:var(--muted);margin-top:12px;font-style:italic;}
+    .field-error{font-size:12px;color:#B91C1C;margin-top:5px;display:block;min-height:0;}
+    .form-group input.invalid,.form-group textarea.invalid{border-color:#EF4444;background:#FEF2F2;}
+    .form-group input.invalid:focus,.form-group textarea.invalid:focus{border-color:#DC2626;}
         footer{background:#0C1D3E;color:white;}
     .footer-top{max-width:1160px;margin:0 auto;padding:56px 32px 48px;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;}
     .footer-brand img{height:38px;width:auto;margin-bottom:16px;}
@@ -190,15 +193,34 @@
 
       <div class="contact-form">
         <h3>Send an enquiry</h3>
-        <form action="#" method="post">
+        <form id="contact-form" novalidate>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
-            <div class="form-group"><label for="fname">First name</label><input type="text" id="fname" name="fname" placeholder="Jane" /></div>
-            <div class="form-group"><label for="lname">Last name</label><input type="text" id="lname" name="lname" placeholder="Smith" /></div>
+            <div class="form-group">
+              <label for="first_name">First name</label>
+              <input type="text" id="first_name" name="first_name" placeholder="Jane" />
+              <span class="field-error" id="err-first_name"></span>
+            </div>
+            <div class="form-group">
+              <label for="last_name">Last name</label>
+              <input type="text" id="last_name" name="last_name" placeholder="Smith" />
+              <span class="field-error" id="err-last_name"></span>
+            </div>
           </div>
-          <div class="form-group"><label for="email">Email</label><input type="email" id="email" name="email" placeholder="jane@example.com" /></div>
-          <div class="form-group"><label for="phone">Phone</label><input type="tel" id="phone" name="phone" placeholder="04xx xxx xxx" /></div>
-          <div class="form-group"><label for="message">How can we help?</label><textarea id="message" name="message" placeholder="Tell us a bit about what you're experiencing..."></textarea></div>
-          <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;font-size:15px;">Send Enquiry</button>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="jane@example.com" />
+            <span class="field-error" id="err-email"></span>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone" placeholder="04xxxxxxxx" maxlength="10" />
+            <span class="field-error" id="err-phone"></span>
+          </div>
+          <div class="form-group">
+            <label for="message">How can we help?</label>
+            <textarea id="message" name="message" placeholder="Tell us a bit about what you're experiencing..."></textarea>
+          </div>
+          <button type="submit" id="contact-submit" class="btn btn-primary" style="width:100%;justify-content:center;font-size:15px;">Send Enquiry</button>
         </form>
         <p class="form-note">Or call us directly on <a href="tel:0883744033" style="color:var(--navy);font-weight:600;">(08) 8374 4033</a> — we're happy to answer questions before you book.</p>
       </div>
@@ -213,7 +235,7 @@
       <img src="brand_assets/ChiroActive Logo Transparent.png" alt="ChiroActive" style="height:38px;width:auto;opacity:0.85;" />
       <p>Experienced chiropractic care in Adelaide's suburbs. Serving the community since 1994.</p>
       <div class="footer-contact-item">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 2.5C2 2.5 3 4.5 5 6.5C7 8.5 9 9.5 10.5 10L12 8.5L11 7.5C11 7.5 9.5 8.5 8.5 7.5C7.5 6.5 8 5.5 8 5.5L7 4.5L5.5 6C5 4.5 4 3 2 2.5Z" stroke="rgba(255,255,255,0.4)" stroke-width="1.3" stroke-linejoin="round"/></svg>
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M12.83 9.87v1.75a1.17 1.17 0 0 1-1.27 1.17 11.54 11.54 0 0 1-5.03-1.79A11.37 11.37 0 0 1 2.73 7.58a11.54 11.54 0 0 1-1.79-5.06A1.17 1.17 0 0 1 2.11 1.17h1.75a1.17 1.17 0 0 1 1.17 1 7.49 7.49 0 0 0 .41 1.64 1.17 1.17 0 0 1-.26 1.23L4.72 5.78a9.33 9.33 0 0 0 3.5 3.5l.74-.74a1.17 1.17 0 0 1 1.23-.26 7.49 7.49 0 0 0 1.64.41A1.17 1.17 0 0 1 12.83 9.87zM8.78 2.92a2.92 2.92 0 0 1 2.33 4.32M11.14 1.46a4.96 4.96 0 0 1 1.69 3.79 4.96 4.96 0 0 1-1.69 3.79" stroke="rgba(255,255,255,0.4)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
         <a href="tel:0883744033">(08) 8374 4033</a>
       </div>
       <div class="footer-contact-item">
@@ -250,12 +272,147 @@
     <p>ABN &middot; AHPRA registered practitioner</p>
   </div>
 </footer>
+<!-- Enquiry popup -->
+<div id="enquiry-popup" style="display:none;position:fixed;inset:0;z-index:1000;align-items:center;justify-content:center;padding:20px;">
+  <div id="enquiry-backdrop" style="position:absolute;inset:0;background:rgba(12,29,62,0.55);backdrop-filter:blur(4px);"></div>
+  <div style="position:relative;background:white;border-radius:14px;padding:36px 32px;max-width:420px;width:100%;box-shadow:0 24px 60px rgba(12,29,62,0.2),0 4px 16px rgba(0,0,0,0.1);text-align:center;">
+    <div id="enquiry-popup-icon" style="width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;"></div>
+    <p id="enquiry-popup-msg" style="font-family:'Outfit',sans-serif;font-size:16px;line-height:1.6;color:var(--text);font-weight:500;"></p>
+    <button id="enquiry-popup-close" class="btn btn-primary" style="margin-top:24px;padding:11px 32px;font-size:14px;">OK</button>
+  </div>
+</div>
+
 <script>
   const h=document.getElementById('hamburger'),m=document.getElementById('mobile-menu'),b=document.getElementById('mobile-backdrop'),c=document.getElementById('mobile-close');
   function openN(){m.classList.add('open');b.classList.add('open');document.body.style.overflow='hidden';}
   function closeN(){m.classList.remove('open');b.classList.remove('open');document.body.style.overflow='';}
   h.addEventListener('click',openN);c.addEventListener('click',closeN);b.addEventListener('click',closeN);
-  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeN();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.getElementById('enquiry-popup').style.display==='flex')closePopup();else if(e.key==='Escape')closeN();});
+
+  const popup=document.getElementById('enquiry-popup');
+  const popupMsg=document.getElementById('enquiry-popup-msg');
+  const popupIcon=document.getElementById('enquiry-popup-icon');
+  const popupClose=document.getElementById('enquiry-popup-close');
+  const popupBackdrop=document.getElementById('enquiry-backdrop');
+
+  function showPopup(success){
+    if(success){
+      popupIcon.style.background='var(--green-faint)';
+      popupIcon.style.border='1px solid rgba(110,181,52,.3)';
+      popupIcon.innerHTML='<svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="10" stroke="#6EB534" stroke-width="1.6"/><path d="M6.5 11.5L9.5 14.5L15.5 8.5" stroke="#6EB534" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      popupMsg.textContent="Thanks your enquiry has been sent. We'll get back to you shortly.";
+    } else {
+      popupIcon.style.background='#FEF2F2';
+      popupIcon.style.border='1px solid rgba(220,38,38,.2)';
+      popupIcon.innerHTML='<svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="10" stroke="#B91C1C" stroke-width="1.6"/><path d="M11 7V11M11 15h.01" stroke="#B91C1C" stroke-width="1.8" stroke-linecap="round"/></svg>';
+      popupMsg.innerHTML='Something went wrong. Please call us directly on <a href="tel:0883744033" style="color:var(--navy);font-weight:600;">(08) 8374 4033</a>.';
+    }
+    popup.style.display='flex';
+    document.body.style.overflow='hidden';
+  }
+
+  function closePopup(){
+    popup.style.display='none';
+    document.body.style.overflow='';
+  }
+
+  popupClose.addEventListener('click',closePopup);
+  popupBackdrop.addEventListener('click',closePopup);
+
+  function setFieldError(id, msg) {
+    const input = document.getElementById(id);
+    const err = document.getElementById('err-' + id);
+    if (msg) {
+      input.classList.add('invalid');
+      err.textContent = msg;
+    } else {
+      input.classList.remove('invalid');
+      err.textContent = '';
+    }
+    return !msg;
+  }
+
+  function validateName(val) {
+    if (!val.trim()) return 'This field is required';
+    if (/\d/.test(val)) return 'Name cannot contain numbers';
+    return '';
+  }
+
+  function validateEmail(val) {
+    if (!val.trim()) return 'Email is required';
+    if (/\s/.test(val)) return 'Email cannot contain spaces';
+    if (!val.includes('@') || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) return 'Please enter a valid email address';
+    return '';
+  }
+
+  function validatePhone(val) {
+    if (!val) return '';
+    if (/\s/.test(val)) return 'Phone number cannot contain spaces';
+    if (!/^\d+$/.test(val)) return 'Phone number must contain digits only';
+    if (val.length !== 10) return 'Phone number must be exactly 10 digits';
+    return '';
+  }
+
+  ['first_name','last_name'].forEach(function(id) {
+    document.getElementById(id).addEventListener('blur', function() {
+      setFieldError(id, validateName(this.value));
+    });
+    document.getElementById(id).addEventListener('input', function() {
+      if (this.classList.contains('invalid')) setFieldError(id, validateName(this.value));
+    });
+  });
+
+  document.getElementById('email').addEventListener('blur', function() {
+    setFieldError('email', validateEmail(this.value));
+  });
+  document.getElementById('email').addEventListener('input', function() {
+    if (this.classList.contains('invalid')) setFieldError('email', validateEmail(this.value));
+  });
+
+  document.getElementById('phone').addEventListener('blur', function() {
+    setFieldError('phone', validatePhone(this.value));
+  });
+  document.getElementById('phone').addEventListener('input', function() {
+    if (this.classList.contains('invalid')) setFieldError('phone', validatePhone(this.value));
+  });
+
+  document.getElementById('contact-form').addEventListener('submit', async function(e){
+    e.preventDefault();
+    const fn = document.getElementById('first_name').value;
+    const ln = document.getElementById('last_name').value;
+    const em = document.getElementById('email').value;
+    const ph = document.getElementById('phone').value;
+    const v1 = setFieldError('first_name', validateName(fn));
+    const v2 = setFieldError('last_name', validateName(ln));
+    const v3 = setFieldError('email', validateEmail(em));
+    const v4 = setFieldError('phone', validatePhone(ph));
+    if (!v1 || !v2 || !v3 || !v4) {
+      const firstInvalid = document.querySelector('.form-group input.invalid');
+      if (firstInvalid) firstInvalid.focus();
+      return;
+    }
+    const btn=document.getElementById('contact-submit');
+    btn.disabled=true;
+    btn.textContent='Sending…';
+    try {
+      const res=await fetch('https://formspree.io/f/mqewjyov',{
+        method:'POST',
+        body:new FormData(this),
+        headers:{'Accept':'application/json'}
+      });
+      if(res.ok){
+        showPopup(true);
+        this.reset();
+      } else {
+        showPopup(false);
+      }
+    } catch {
+      showPopup(false);
+    } finally {
+      btn.disabled=false;
+      btn.textContent='Send Enquiry';
+    }
+  });
 </script>
 </body>
 </html>
